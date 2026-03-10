@@ -19,9 +19,9 @@ export const paths = {
 };
 
 export const models = {
-  extract: resolveModelForProvider("gpt-5.4"),
-  search: resolveModelForProvider("gpt-5.4"),
-  ground: resolveModelForProvider("gpt-5.4")
+  extract: resolveModelForProvider("z-ai/glm-4.7"),
+  search: resolveModelForProvider("z-ai/glm-4.7"),
+  ground: resolveModelForProvider("z-ai/glm-4.7")
 };
 
 export const api = {
