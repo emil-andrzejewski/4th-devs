@@ -1,0 +1,14 @@
+{
+  "name": "01_01_zadanie",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Pipeline for people task: parse, tag with LLM, send answer",
+  "main": "scripts/01-parse-people.js",
+  "scripts": {
+    "parse": "node ./scripts/01-parse-people.js",
+    "tag": "node ./scripts/02-tag-jobs.js",
+    "send": "node ./scripts/03-send-answer.js",
+    "all": "npm run parse && npm run tag && npm run send"
+  },
+  "license": "ISC"
+}
