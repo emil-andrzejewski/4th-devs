@@ -12,14 +12,19 @@ const run = async () => {
   }
 
   answer.forEach((record, index) => validateOutputRecord(record, index + 1));
+  const transportOnly = answer.filter((record) => record.tags.includes("transport"));
+
+  if (transportOnly.length === 0) {
+    throw new Error("No records with tag 'transport' found in people-with-tags.json");
+  }
 
   const payload = {
     apikey: verify.apiKey,
     task: verify.task,
-    answer
+    answer: transportOnly
   };
 
-  console.log(`[send] Sending ${answer.length} records to ${verify.endpoint}`);
+  console.log(`[send] Sending ${transportOnly.length} records with tag 'transport' to ${verify.endpoint}`);
   const response = await fetch(verify.endpoint, {
     method: "POST",
     headers: {

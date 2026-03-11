@@ -6,3 +6,4 @@ translated/
 vault/
 
 .idea
+../output/*
