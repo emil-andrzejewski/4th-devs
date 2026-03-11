@@ -10,7 +10,8 @@ export const paths = {
   peopleTxt: path.join(PROJECT_DIR, "people.txt"),
   output: path.join(PROJECT_DIR, "output"),
   peopleWithJobs: path.join(PROJECT_DIR, "output", "people-with-jobs.json"),
-  peopleWithTags: path.join(PROJECT_DIR, "output", "people-with-tags.json")
+  peopleWithTags: path.join(PROJECT_DIR, "output", "people-with-tags.json"),
+  transportPeople: path.join(PROJECT_DIR, "output", "transport.people.json"),
 };
 
 export const models = {
