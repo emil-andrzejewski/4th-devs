@@ -1,0 +1,15 @@
+{
+  "name": "01_02_zadanie",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Deterministyczny pipeline findhim: lokalizacje + access level + verify",
+  "main": "app.js",
+  "scripts": {
+    "step1": "node ./scripts/01-prepare-suspects.js",
+    "step2": "node ./scripts/02-find-candidate.js",
+    "step3": "node ./scripts/03-send-answer.js",
+    "all": "node ./app.js"
+  },
+  "license": "ISC"
+}
+

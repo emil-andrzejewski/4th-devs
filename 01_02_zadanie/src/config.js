@@ -1,56 +1,41 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { RESPONSES_API_ENDPOINT, resolveModelForProvider } from "../../config.js";
+import { existsSync } from "node:fs";
 
 const DIRNAME = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_DIR = path.resolve(DIRNAME, "..");
 const ROOT_DIR = path.resolve(PROJECT_DIR, "..");
+const ROOT_ENV_FILE = path.join(ROOT_DIR, ".env");
+
+if (existsSync(ROOT_ENV_FILE) && typeof process.loadEnvFile === "function") {
+  process.loadEnvFile(ROOT_ENV_FILE);
+}
 
 export const paths = {
-  root: ROOT_DIR,
   project: PROJECT_DIR,
-  notes: path.join(PROJECT_DIR, "notes"),
+  inputSuspects: path.join(PROJECT_DIR, "input", "transport.people.json"),
   output: path.join(PROJECT_DIR, "output"),
-  template: path.join(PROJECT_DIR, "template.html"),
-  concepts: path.join(PROJECT_DIR, "output", "concepts.json"),
-  dedupe: path.join(PROJECT_DIR, "output", "dedupe.json"),
-  search: path.join(PROJECT_DIR, "output", "search_results.json"),
-  grounded: path.join(PROJECT_DIR, "output", "grounded.html")
+  suspects: path.join(PROJECT_DIR, "output", "suspects.json"),
+  powerPlants: path.join(PROJECT_DIR, "output", "power-plants.json"),
+  locationsScan: path.join(PROJECT_DIR, "output", "locations-scan.json"),
+  candidateLocation: path.join(PROJECT_DIR, "output", "candidate-location.json"),
+  finalPayload: path.join(PROJECT_DIR, "output", "verify-payload.json"),
+  verifyResponse: path.join(PROJECT_DIR, "output", "verify-response.json")
 };
 
-export const models = {
-  extract: resolveModelForProvider("z-ai/glm-4.7"),
-  search: resolveModelForProvider("z-ai/glm-4.7"),
-  ground: resolveModelForProvider("z-ai/glm-4.7")
-};
-
-export const api = {
-  endpoint: RESPONSES_API_ENDPOINT,
-  timeoutMs: 180_000,
+export const hub = {
+  baseUrl: "https://hub.ag3nts.org",
+  timeoutMs: 30_000,
   retries: 3,
-  retryDelayMs: 1000
+  retryDelayMs: 700
 };
 
-const isFlag = (arg) => arg.startsWith("--");
-const args = process.argv.slice(2);
-
-const parseBatchSize = () => {
-  if (args.includes("--no-batch")) {
-    return 1;
-  }
-
-  const batchArg = args.find((arg) => arg.startsWith("--batch="));
-
-  if (batchArg) {
-    const value = parseInt(batchArg.split("=")[1], 10);
-    return Number.isNaN(value) || value < 1 ? 3 : Math.min(value, 10);
-  }
-
-  return 3; // default batch size
+export const verify = {
+  endpoint: `${hub.baseUrl}/verify`,
+  task: "findhim",
+  apiKey: process.env.AG3NTS_API_KEY?.trim() || ""
 };
 
 export const cli = {
-  force: args.includes("--force"),
-  inputFile: args.find((arg) => !isFlag(arg)) ?? null,
-  batchSize: parseBatchSize()
+  force: process.argv.includes("--force")
 };
