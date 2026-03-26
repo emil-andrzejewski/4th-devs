@@ -8,6 +8,9 @@
     "step1": "node ./scripts/01-prepare-suspects.js",
     "step2": "node ./scripts/02-find-candidate.js",
     "step3": "node ./scripts/03-send-answer.js",
+    "step4": "node ./scripts/04-check-access-levels.js",
+    "step5": "node ./scripts/05-check-groups-access-levels.js",
+    "verify:payload": "node ./scripts/06-verify-payload.js",
     "all": "node ./app.js"
   },
   "license": "ISC"

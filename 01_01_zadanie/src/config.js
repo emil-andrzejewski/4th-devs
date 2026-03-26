@@ -8,10 +8,17 @@ const PROJECT_DIR = path.resolve(DIRNAME, "..");
 export const paths = {
   project: PROJECT_DIR,
   peopleTxt: path.join(PROJECT_DIR, "people.txt"),
+  peopleAllTxt: path.join(PROJECT_DIR, "people_all.txt"),
+  peopleInput: path.join(PROJECT_DIR, "people_all.txt"),
   output: path.join(PROJECT_DIR, "output"),
   peopleWithJobs: path.join(PROJECT_DIR, "output", "people-with-jobs.json"),
   peopleWithTags: path.join(PROJECT_DIR, "output", "people-with-tags.json"),
   transportPeople: path.join(PROJECT_DIR, "output", "transport.people.json"),
+  peopleNormalized: path.join(PROJECT_DIR, "output", "people.normalized.json"),
+  groupsBirthDatePlace: path.join(PROJECT_DIR, "output", "groups.birthdate-place.json"),
+  groupsBirthDateJob: path.join(PROJECT_DIR, "output", "groups.birthdate-job.json"),
+  groupsBirthPlaceJob: path.join(PROJECT_DIR, "output", "groups.birthplace-job.json"),
+  groupsBirthDatePlaceJob: path.join(PROJECT_DIR, "output", "groups.birthdate-place-job.json"),
 };
 
 export const models = {

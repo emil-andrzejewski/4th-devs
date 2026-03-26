@@ -22,6 +22,8 @@ cd C:\Users\Emil\repos\aidevs\4th-devs\01_02_zadanie
 npm run step1
 npm run step2
 npm run step3
+npm run step4
+npm run step5
 ```
 
 Lub calosc jednym poleceniem:
@@ -35,6 +37,8 @@ npm run all
 Artefakty zapisywane sa w `output/`:
 
 - `suspects.json`
+- `access-levels.json`
+- `access-levels-groups.json`
 - `power-plants.json`
 - `locations-scan.json`
 - `candidate-location.json`

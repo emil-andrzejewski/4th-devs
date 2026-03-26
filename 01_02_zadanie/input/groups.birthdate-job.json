@@ -1,0 +1,255 @@
+[
+  {
+    "keyLabel": "birthDate|job|gender",
+    "key": "13.04.1992|Zajmuje się badaniem i rozwojem nowych materiałów, które mają specyficzne właściwości. Stosuje wiedzę z zakresu chemii i fizyki do tworzenia innowacyjnych surowców. Jego odkrycia mogą znaleźć zastosowanie w wielu branżach.|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 22549,
+        "name": "Alicja",
+        "surname": "Kędziora",
+        "birthDate": "13.04.1992",
+        "birthPlace": "Dębica",
+        "job": "Zajmuje się badaniem i rozwojem nowych materiałów, które mają specyficzne właściwości. Stosuje wiedzę z zakresu chemii i fizyki do tworzenia innowacyjnych surowców. Jego odkrycia mogą znaleźć zastosowanie w wielu branżach."
+      },
+      {
+        "id": 22550,
+        "name": "Joanna",
+        "surname": "Kamińska",
+        "birthDate": "13.04.1992",
+        "birthPlace": "Nowa Sól",
+        "job": "Zajmuje się badaniem i rozwojem nowych materiałów, które mają specyficzne właściwości. Stosuje wiedzę z zakresu chemii i fizyki do tworzenia innowacyjnych surowców. Jego odkrycia mogą znaleźć zastosowanie w wielu branżach."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|job|gender",
+    "key": "13.04.1997|Zajmuje się badaniem organizmów żyjących w ekstremalnych warunkach, takich jak gorące źródła, głębiny oceaniczne czy tereny zlodowaciałe, w celu odkrycia ich niezwykłych adaptacji. Jego odkrycia mogą mieć znaczenie dla astrobiologii.|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 22643,
+        "name": "Eryk",
+        "surname": "Górski",
+        "birthDate": "13.04.1997",
+        "birthPlace": "Sopot",
+        "job": "Zajmuje się badaniem organizmów żyjących w ekstremalnych warunkach, takich jak gorące źródła, głębiny oceaniczne czy tereny zlodowaciałe, w celu odkrycia ich niezwykłych adaptacji. Jego odkrycia mogą mieć znaczenie dla astrobiologii."
+      },
+      {
+        "id": 22644,
+        "name": "Krzysztof",
+        "surname": "Matuszewski",
+        "birthDate": "13.04.1997",
+        "birthPlace": "Zgierz",
+        "job": "Zajmuje się badaniem organizmów żyjących w ekstremalnych warunkach, takich jak gorące źródła, głębiny oceaniczne czy tereny zlodowaciałe, w celu odkrycia ich niezwykłych adaptacji. Jego odkrycia mogą mieć znaczenie dla astrobiologii."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|job|gender",
+    "key": "18.01.1975|Specjalista od planowania przestrzeni budowlanych, dbający o ich estetykę i funkcjonalność. Działa na styku sztuki i inżynierii, tworząc projekty, które odpowiadają potrzebom społecznym. Jego prace kształtują nasze środowisko życia.|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 13632,
+        "name": "Teresa",
+        "surname": "Baran",
+        "birthDate": "18.01.1975",
+        "birthPlace": "Mysłowice",
+        "job": "Specjalista od planowania przestrzeni budowlanych, dbający o ich estetykę i funkcjonalność. Działa na styku sztuki i inżynierii, tworząc projekty, które odpowiadają potrzebom społecznym. Jego prace kształtują nasze środowisko życia."
+      },
+      {
+        "id": 13633,
+        "name": "Magdalena",
+        "surname": "Wojciechowska",
+        "birthDate": "18.01.1975",
+        "birthPlace": "Turek",
+        "job": "Specjalista od planowania przestrzeni budowlanych, dbający o ich estetykę i funkcjonalność. Działa na styku sztuki i inżynierii, tworząc projekty, które odpowiadają potrzebom społecznym. Jego prace kształtują nasze środowisko życia."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|job|gender",
+    "key": "21.02.1979|Jej misją jest wspieranie ludzi w rozwoju osobistym i przezwyciężaniu trudności emocjonalnych. Potrafi zdiagnozować problemy i zaproponować indywidualnie dopasowane strategie terapeutyczne. Buduje poczucie bezpieczeństwa i zaufania.|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 3041,
+        "name": "Sabina",
+        "surname": "Bąk",
+        "birthDate": "21.02.1979",
+        "birthPlace": "Łowicz",
+        "job": "Jej misją jest wspieranie ludzi w rozwoju osobistym i przezwyciężaniu trudności emocjonalnych. Potrafi zdiagnozować problemy i zaproponować indywidualnie dopasowane strategie terapeutyczne. Buduje poczucie bezpieczeństwa i zaufania."
+      },
+      {
+        "id": 3042,
+        "name": "Stanisława",
+        "surname": "Kwiatkowska",
+        "birthDate": "21.02.1979",
+        "birthPlace": "Sanok",
+        "job": "Jej misją jest wspieranie ludzi w rozwoju osobistym i przezwyciężaniu trudności emocjonalnych. Potrafi zdiagnozować problemy i zaproponować indywidualnie dopasowane strategie terapeutyczne. Buduje poczucie bezpieczeństwa i zaufania."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|job|gender",
+    "key": "22.06.1974|Stosuje techniki hodowli komórkowej i tkankowej, pracując z namnażaniem komórek in vitro w celach badawczych lub terapeutycznych. Jego umiejętności są niezbędne w badaniach nad regeneracją tkanek i rozwojem nowych terapii.|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 15493,
+        "name": "Krzysztof",
+        "surname": "Michalski",
+        "birthDate": "22.06.1974",
+        "birthPlace": "Łomża",
+        "job": "Stosuje techniki hodowli komórkowej i tkankowej, pracując z namnażaniem komórek in vitro w celach badawczych lub terapeutycznych. Jego umiejętności są niezbędne w badaniach nad regeneracją tkanek i rozwojem nowych terapii."
+      },
+      {
+        "id": 15494,
+        "name": "Gabriel",
+        "surname": "Maciejewski",
+        "birthDate": "22.06.1974",
+        "birthPlace": "Łuków",
+        "job": "Stosuje techniki hodowli komórkowej i tkankowej, pracując z namnażaniem komórek in vitro w celach badawczych lub terapeutycznych. Jego umiejętności są niezbędne w badaniach nad regeneracją tkanek i rozwojem nowych terapii."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|job|gender",
+    "key": "24.08.1967|Ta osoba tworzy fundamenty i ściany budynków, łącząc ze sobą cegły, pustaki lub inne materiały budowlane za pomocą zaprawy. Jej praca wymaga precyzji, siły i umiejętności pracy w zespole, aby zapewnić stabilność i estetykę powstającej konstrukcji. Często pracuje w trudnych warunkach atmosferycznych, ale widok wznoszonych budowli jest jej satysfakcjonującą nagrodą.|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 16598,
+        "name": "Feliks",
+        "surname": "Lewandowski",
+        "birthDate": "24.08.1967",
+        "birthPlace": "Ostrów Wielkopolski",
+        "job": "Ta osoba tworzy fundamenty i ściany budynków, łącząc ze sobą cegły, pustaki lub inne materiały budowlane za pomocą zaprawy. Jej praca wymaga precyzji, siły i umiejętności pracy w zespole, aby zapewnić stabilność i estetykę powstającej konstrukcji. Często pracuje w trudnych warunkach atmosferycznych, ale widok wznoszonych budowli jest jej satysfakcjonującą nagrodą."
+      },
+      {
+        "id": 16599,
+        "name": "Błażej",
+        "surname": "Kruk",
+        "birthDate": "24.08.1967",
+        "birthPlace": "Warszawa",
+        "job": "Ta osoba tworzy fundamenty i ściany budynków, łącząc ze sobą cegły, pustaki lub inne materiały budowlane za pomocą zaprawy. Jej praca wymaga precyzji, siły i umiejętności pracy w zespole, aby zapewnić stabilność i estetykę powstającej konstrukcji. Często pracuje w trudnych warunkach atmosferycznych, ale widok wznoszonych budowli jest jej satysfakcjonującą nagrodą."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|job|gender",
+    "key": "29.05.1996|Osoba ta zajmuje się odkrywaniem i badaniem praw rządzących światem przyrody poprzez język liczb i równań. Tworzy złożone modele opisujące zjawiska fizyczne, chemiczne czy biologiczne, co pozwala lepiej zrozumieć otaczającą nas rzeczywistość. Jej analizy są fundamentem dla innowacji w nauce i przemyśle.|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 9775,
+        "name": "Matylda",
+        "surname": "Bielawska",
+        "birthDate": "29.05.1996",
+        "birthPlace": "Gdynia",
+        "job": "Osoba ta zajmuje się odkrywaniem i badaniem praw rządzących światem przyrody poprzez język liczb i równań. Tworzy złożone modele opisujące zjawiska fizyczne, chemiczne czy biologiczne, co pozwala lepiej zrozumieć otaczającą nas rzeczywistość. Jej analizy są fundamentem dla innowacji w nauce i przemyśle."
+      },
+      {
+        "id": 9776,
+        "name": "Wioletta",
+        "surname": "Zawadzka",
+        "birthDate": "29.05.1996",
+        "birthPlace": "Rybnik",
+        "job": "Osoba ta zajmuje się odkrywaniem i badaniem praw rządzących światem przyrody poprzez język liczb i równań. Tworzy złożone modele opisujące zjawiska fizyczne, chemiczne czy biologiczne, co pozwala lepiej zrozumieć otaczającą nas rzeczywistość. Jej analizy są fundamentem dla innowacji w nauce i przemyśle."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|job|gender",
+    "key": "3.01.1971|Ten pracownik zajmuje się montażem i konserwacją elektrycznych systemów grzewczych, takich jak ogrzewanie podłogowe czy elektryczne kotły. Dba o prawidłowe połączenie elementów i odpowiedni dobór mocy grzewczej. Jego praca zapewnia komfort cieplny w budynkach.|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 19236,
+        "name": "Borys",
+        "surname": "Wróblewski",
+        "birthDate": "3.01.1971",
+        "birthPlace": "Starachowice",
+        "job": "Ten pracownik zajmuje się montażem i konserwacją elektrycznych systemów grzewczych, takich jak ogrzewanie podłogowe czy elektryczne kotły. Dba o prawidłowe połączenie elementów i odpowiedni dobór mocy grzewczej. Jego praca zapewnia komfort cieplny w budynkach."
+      },
+      {
+        "id": 19237,
+        "name": "Jan",
+        "surname": "Sawicki",
+        "birthDate": "3.01.1971",
+        "birthPlace": "Zamość",
+        "job": "Ten pracownik zajmuje się montażem i konserwacją elektrycznych systemów grzewczych, takich jak ogrzewanie podłogowe czy elektryczne kotły. Dba o prawidłowe połączenie elementów i odpowiedni dobór mocy grzewczej. Jego praca zapewnia komfort cieplny w budynkach."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|job|gender",
+    "key": "3.04.1959|Ten specjalista stara się odkrywać nowe zjawiska i formułować prawa, które je opisują. Jego zainteresowania mogą obejmować optykę, termodynamikę lub mechanikę kwantową. Potrzebne są mu zdolności do myślenia abstrakcyjnego.|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 20375,
+        "name": "Robert",
+        "surname": "Bąk",
+        "birthDate": "3.04.1959",
+        "birthPlace": "Cieszyn",
+        "job": "Ten specjalista stara się odkrywać nowe zjawiska i formułować prawa, które je opisują. Jego zainteresowania mogą obejmować optykę, termodynamikę lub mechanikę kwantową. Potrzebne są mu zdolności do myślenia abstrakcyjnego."
+      },
+      {
+        "id": 20376,
+        "name": "Przemysław",
+        "surname": "Adamczyk",
+        "birthDate": "3.04.1959",
+        "birthPlace": "Ustka",
+        "job": "Ten specjalista stara się odkrywać nowe zjawiska i formułować prawa, które je opisują. Jego zainteresowania mogą obejmować optykę, termodynamikę lub mechanikę kwantową. Potrzebne są mu zdolności do myślenia abstrakcyjnego."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|job|gender",
+    "key": "3.09.1961|Zajmuje się przywracaniem do życia maszyn, które przestały działać poprawnie. Potrafi zdemontować skomplikowany mechanizm, zidentyfikować uszkodzony element i wymienić go na nowy. Jego umiejętności są nieocenione dla zapewnienia mobilności i ciągłości pracy wielu branż.|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 23492,
+        "name": "Wiktoria",
+        "surname": "Nowak",
+        "birthDate": "3.09.1961",
+        "birthPlace": "Tarnowskie Góry",
+        "job": "Zajmuje się przywracaniem do życia maszyn, które przestały działać poprawnie. Potrafi zdemontować skomplikowany mechanizm, zidentyfikować uszkodzony element i wymienić go na nowy. Jego umiejętności są nieocenione dla zapewnienia mobilności i ciągłości pracy wielu branż."
+      },
+      {
+        "id": 23493,
+        "name": "Genowefa",
+        "surname": "Kruk",
+        "birthDate": "3.09.1961",
+        "birthPlace": "Tczew",
+        "job": "Zajmuje się przywracaniem do życia maszyn, które przestały działać poprawnie. Potrafi zdemontować skomplikowany mechanizm, zidentyfikować uszkodzony element i wymienić go na nowy. Jego umiejętności są nieocenione dla zapewnienia mobilności i ciągłości pracy wielu branż."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|job|gender",
+    "key": "4.07.1969|Kiedy masz problem, który nie daje Ci spokoju i czujesz, że potrzebujesz profesjonalnego wsparcia, często właśnie do niej się zwracasz. Jej wiedza i doświadczenie pomagają rozwikłać trudne sytuacje emocjonalne i społeczne. Prowadzi proces terapeutyczny, który uwalnia od psychicznego ciężaru.|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 5678,
+        "name": "Emil",
+        "surname": "Pietrzak",
+        "birthDate": "4.07.1969",
+        "birthPlace": "Malbork",
+        "job": "Kiedy masz problem, który nie daje Ci spokoju i czujesz, że potrzebujesz profesjonalnego wsparcia, często właśnie do niej się zwracasz. Jej wiedza i doświadczenie pomagają rozwikłać trudne sytuacje emocjonalne i społeczne. Prowadzi proces terapeutyczny, który uwalnia od psychicznego ciężaru."
+      },
+      {
+        "id": 5679,
+        "name": "Konrad",
+        "surname": "Michalski",
+        "birthDate": "4.07.1969",
+        "birthPlace": "Sosnowiec",
+        "job": "Kiedy masz problem, który nie daje Ci spokoju i czujesz, że potrzebujesz profesjonalnego wsparcia, często właśnie do niej się zwracasz. Jej wiedza i doświadczenie pomagają rozwikłać trudne sytuacje emocjonalne i społeczne. Prowadzi proces terapeutyczny, który uwalnia od psychicznego ciężaru."
+      }
+    ]
+  }
+]

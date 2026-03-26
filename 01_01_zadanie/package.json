@@ -5,6 +5,11 @@
   "description": "Pipeline for people task: parse, tag with LLM, send answer",
   "main": "scripts/01-parse-people.js",
   "scripts": {
+    "find:1": "node ./scripts/05-find-same-birthdate-place.js",
+    "find:2": "node ./scripts/06-find-same-birthdate-job.js",
+    "find:3": "node ./scripts/07-find-same-birthplace-job.js",
+    "find:4": "node ./scripts/08-find-same-birthdate-place-job.js",
+    "find:all": "npm run find:1 && npm run find:2 && npm run find:3 && npm run find:4"
   },
   "license": "ISC"
 }

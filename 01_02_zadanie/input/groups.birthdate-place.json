@@ -1,0 +1,1175 @@
+[
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "1.06.1973|Kwidzyn|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 10675,
+        "name": "Rafał",
+        "surname": "Skiba",
+        "birthDate": "1.06.1973",
+        "birthPlace": "Kwidzyn",
+        "job": "Potrafi ocenić stan zdrowia, postawić diagnozę i zaproponować odpowiednie leczenie.  Jej wiedza pozwala na zrozumienie złożoności ludzkiego organizmu.  Praca ta jest niezwykle ważna dla społeczeństwa."
+      },
+      {
+        "id": 14457,
+        "name": "Przemysław",
+        "surname": "Szulc",
+        "birthDate": "1.06.1973",
+        "birthPlace": "Kwidzyn",
+        "job": "Specjalista ten tworzy rozwiązania umożliwiające komunikację między różnymi systemami. Projektuje interfejsy, które pozwalają na wymianę danych i funkcjonalności, integrując ze sobą heterogeniczne technologie. To budowniczy mostów w świecie cyfrowym."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "1.07.1967|Oświęcim|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 10053,
+        "name": "Kornelia",
+        "surname": "Głowacka",
+        "birthDate": "1.07.1967",
+        "birthPlace": "Oświęcim",
+        "job": "Osoba, która fizycznie wznosi konstrukcje budowlane, koncentrując się na ścianach. Dobiera odpowiednie materiały i techniki, aby uzyskać stabilne i wytrzymałe przegrody. Jej praca jest podstawą bezpiecznego budownictwa."
+      },
+      {
+        "id": 18144,
+        "name": "Sylwia",
+        "surname": "Kaczorowska",
+        "birthDate": "1.07.1967",
+        "birthPlace": "Oświęcim",
+        "job": "Ten ekspert wykorzystuje swoje głębokie zrozumienie liczb i ich własności do rozwiązywania problemów teoretycznych i praktycznych. Jego praca nad równaniami diofantycznymi czy wielomianami jest istotna dla kryptografii i teorii liczb."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "10.05.1988|Rzeszów|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 786,
+        "name": "Sara",
+        "surname": "Nowak",
+        "birthDate": "10.05.1988",
+        "birthPlace": "Rzeszów",
+        "job": "Dba o bezpieczeństwo obywateli, reagując na zgłoszenia i patrolując ulice. Jego codziennością jest pilnowanie porządku publicznego i zapobieganie przestępczości. Często staje w obliczu trudnych sytuacji wymagających odwagi i zimnej krwi."
+      },
+      {
+        "id": 1355,
+        "name": "Hanna",
+        "surname": "Sikora",
+        "birthDate": "10.05.1988",
+        "birthPlace": "Rzeszów",
+        "job": "Głównym celem jest poszerzanie wiedzy o podstawowych siłach natury. Od analizy kolektywnych zachowań atomów po badanie rozszerzania się wszechświata, pole działania jest ogromne. Często jest to praca badawcza na uczelniach lub w instytutach naukowych."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "11.07.1977|Olsztyn|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 55,
+        "name": "Gustaw",
+        "surname": "Kamiński",
+        "birthDate": "11.07.1977",
+        "birthPlace": "Olsztyn",
+        "job": "Analizuje genetyczne podstawy zachowań zwierząt i ludzi, badając, w jaki sposób DNA wpływa na ich reakcje, interakcje i zdolność adaptacji. Jego praca otwiera nowe perspektywy w psychologii i socjobiologii."
+      },
+      {
+        "id": 11087,
+        "name": "Zygmunt",
+        "surname": "Kostrzewa",
+        "birthDate": "11.07.1977",
+        "birthPlace": "Olsztyn",
+        "job": "Potrafi zdiagnozować nawet najbardziej ukryte problemy zdrowotne.  Jej analiza objawów i wyników badań jest kluczowa dla dalszego postępowania.  To zawód o najwyższym stopniu odpowiedzialności."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "11.11.1988|Nakło nad Notecią|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 4195,
+        "name": "Wiktor",
+        "surname": "Wójcik",
+        "birthDate": "11.11.1988",
+        "birthPlace": "Nakło nad Notecią",
+        "job": "Jest kimś, do kogo zwracamy się w chwili największego bólu i niepewności.  Jej obecność i profesjonalizm dają poczucie bezpieczeństwa i nadziei na powrót do pełni sił.  Dba o ludzkie zdrowie na każdym etapie życia."
+      },
+      {
+        "id": 15966,
+        "name": "Józef",
+        "surname": "Bednarek",
+        "birthDate": "11.11.1988",
+        "birthPlace": "Nakło nad Notecią",
+        "job": "Ta osoba jest ważnym elementem systemu oświaty, zajmuje się dydaktyką i wychowaniem. Pomaga uczniom zrozumieć świat, rozwijać swoje zainteresowania i umiejętności. Jest kluczowa dla rozwoju młodego pokolenia."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "12.08.1958|Dąbrowa Górnicza|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 16753,
+        "name": "Eryk",
+        "surname": "Olszewski",
+        "birthDate": "12.08.1958",
+        "birthPlace": "Dąbrowa Górnicza",
+        "job": "Ta osoba zarządza skomplikowanymi łańcuchami dostaw, dbając o sprawne przemieszczanie towarów od producenta do finalnego odbiorcy. Kluczowe jest dla niej optymalizowanie tras, wybór odpowiednich środków lokomocji oraz monitorowanie ruchu na każdym etapie przepływu dóbr."
+      },
+      {
+        "id": 17716,
+        "name": "Krzysztof",
+        "surname": "Kaczmarczyk",
+        "birthDate": "12.08.1958",
+        "birthPlace": "Dąbrowa Górnicza",
+        "job": "Ten ekspert analizuje i interpretuje złożone dane, poszukując ukrytych wzorców. Pracuje nad zrozumieniem fundamentalnych oddziaływań i cząstek. Często wykorzystuje zaawansowane obliczenia komputerowe."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "13.01.1984|Słupsk|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 10938,
+        "name": "Angelika",
+        "surname": "Michalska",
+        "birthDate": "13.01.1984",
+        "birthPlace": "Słupsk",
+        "job": "Potrafi uspokoić przerażonego pacjenta i przekazać trudne informacje w sposób delikatny, ale stanowczy. Odpowiedzialna jest za przeprowadzanie zabiegów, które przywracają sprawność lub łagodzą ból.  Wymaga to precyzji, spokoju i ogromnej empatii."
+      },
+      {
+        "id": 14941,
+        "name": "Oliwia",
+        "surname": "Zawadzka",
+        "birthDate": "13.01.1984",
+        "birthPlace": "Słupsk",
+        "job": "Specjalista w dziedzinie wznoszenia konstrukcji opartych na systemach modułowych. Starannie dobiera i układa pojedyncze elementy, które następnie spaja specjalistycznym materiałem, tworząc jednolitą i wytrzymałą całość. Jej praca jest kluczowa dla bezpieczeństwa całej budowli, od fundamentów aż po dach."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "13.03.1976|Świętochłowice|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 4074,
+        "name": "Krystyna",
+        "surname": "Wrona",
+        "birthDate": "13.03.1976",
+        "birthPlace": "Świętochłowice",
+        "job": "Jest ekspertem w dziedzinie prawa i jego stosowania w praktyce. Posiada wiedzę o procedurach prawnych i potrafi ją wykorzystać do rozwiązania problemów i rozstrzygania sporów. Jest częścią systemu sprawiedliwości."
+      },
+      {
+        "id": 4589,
+        "name": "Aleksandra",
+        "surname": "Wróbel",
+        "birthDate": "13.03.1976",
+        "birthPlace": "Świętochłowice",
+        "job": "Jest odpowiedzialny za egzekwowanie prawa i porządku publicznego, dbając o przestrzeganie przepisów przez wszystkich obywateli. Jego działania mają na celu zapobieganie przestępczości i zapewnienie bezpieczeństwa. Jest strażnikiem praworządności."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "14.02.1989|Sopot|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 1357,
+        "name": "Roman",
+        "surname": "Pietrzak",
+        "birthDate": "14.02.1989",
+        "birthPlace": "Sopot",
+        "job": "Głównym celem jest poszerzanie wiedzy o podstawowych siłach natury. Od analizy kolektywnych zachowań atomów po badanie rozszerzania się wszechświata, pole działania jest ogromne. Często jest to praca badawcza na uczelniach lub w instytutach naukowych."
+      },
+      {
+        "id": 15608,
+        "name": "Krzysztof",
+        "surname": "Stępień",
+        "birthDate": "14.02.1989",
+        "birthPlace": "Sopot",
+        "job": "Ta dziedzina nauki wymaga ciągłego doskonalenia metod badawczych. Osoba na tym stanowisku może zajmować się analizą zanieczyszczeń w żywności lub opracowywaniem składników kosmetyków. Kluczowe jest znajomość najnowszych technik laboratoryjnych."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "14.08.1956|Toruń|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 14160,
+        "name": "Emil",
+        "surname": "Kurek",
+        "birthDate": "14.08.1956",
+        "birthPlace": "Toruń",
+        "job": "Specjalista ten dostosowuje instalacje elektryczne do potrzeb konkretnych obiektów handlowych i usługowych. Montuje systemy oświetleniowe, zasilanie dla urządzeń gastronomicznych i wag. Jego praca wpływa na funkcjonalność i estetykę miejsc pracy."
+      },
+      {
+        "id": 15331,
+        "name": "Kamil",
+        "surname": "Kaczorowski",
+        "birthDate": "14.08.1956",
+        "birthPlace": "Toruń",
+        "job": "Specjalizuje się w tworzeniu drewnianych arcydzieł, od mebli po elementy wykończeniowe. Jego talent polega na wyczuciu materiału, precyzyjnym cięciu i perfekcyjnym składaniu. Każdy przedmiot opuszczający jego pracownię to świadectwo jego kunsztu."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "16.02.1979|Siemianowice Śląskie|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 6337,
+        "name": "Emilia",
+        "surname": "Zając",
+        "birthDate": "16.02.1979",
+        "birthPlace": "Siemianowice Śląskie",
+        "job": "Monitoruje i ocenia wpływ zmian klimatycznych na organizmy żywe i ich siedliska, badając, jak gatunki reagują na wzrost temperatury i inne globalne przemiany. Jego działania mają na celu prognozowanie przyszłych skutków."
+      },
+      {
+        "id": 14312,
+        "name": "Teodora",
+        "surname": "Pawlak",
+        "birthDate": "16.02.1979",
+        "birthPlace": "Siemianowice Śląskie",
+        "job": "Specjalista ten pracuje przy budowie i rozbudowie zasilania elektrycznego. Jego zadaniem jest również lokalizowanie i usuwanie awarii w instalacjach, co często wiąże się z pracą w trudnych warunkach. Wymagana jest umiejętność czytania schematów i posługiwania się specjalistycznymi narzędziami."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "17.07.1995|Warszawa|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 589,
+        "name": "Maciej",
+        "surname": "Pietrzak",
+        "birthDate": "17.07.1995",
+        "birthPlace": "Warszawa",
+        "job": "Codziennością jest praca nad syntezą nowych związków chemicznych, które znajdują zastosowanie w rozmaitych branżach. Celem jest często poprawa właściwości materiałów lub stworzenie bardziej ekologicznych alternatyw. Niezbędna jest precyzja i cierpliwość."
+      },
+      {
+        "id": 21088,
+        "name": "Dominik",
+        "surname": "Piotrowski",
+        "birthDate": "17.07.1995",
+        "birthPlace": "Warszawa",
+        "job": "Tworzy plany budynków, które charakteryzują się innowacyjnością i dbałością o szczegóły. Jego zadaniem jest połączenie estetyki z wytrzymałością konstrukcyjną i funkcjonalnością. Jego projekty są mostem między ideą a realizacją."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "17.12.1990|Toruń|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 12072,
+        "name": "Barbara",
+        "surname": "Dudek",
+        "birthDate": "17.12.1990",
+        "birthPlace": "Toruń",
+        "job": "Pracuje nad odkryciem i rozwojem nowych antybiotyków i innych środków przeciwdrobnoustrojowych, badając sposoby walki z narastającą opornością bakteryjną. Jego działania mają na celu ochronę zdrowia publicznego."
+      },
+      {
+        "id": 21282,
+        "name": "Nikola",
+        "surname": "Lewandowska",
+        "birthDate": "17.12.1990",
+        "birthPlace": "Toruń",
+        "job": "Tworzy systemy do przetwarzania dużych ilości danych, znane jako Big Data. Buduje rozwiązania, które pozwalają na analizę i wyciąganie wniosków z ogromnych zbiorów informacji. To klucz do zrozumienia złożonych trendów i wzorców."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "18.04.1958|Sopot|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 10426,
+        "name": "Gabriel",
+        "surname": "Krawczyk",
+        "birthDate": "18.04.1958",
+        "birthPlace": "Sopot",
+        "job": "Posiada dogłębną wiedzę z zakresu genetyki, analizując DNA w celu zrozumienia dziedziczności cech, rozwoju chorób genetycznych czy identyfikacji jednostek. Jego praca jest ważna zarówno w medycynie, jak i w kryminalistyce."
+      },
+      {
+        "id": 13884,
+        "name": "Wojciech",
+        "surname": "Kołodziej",
+        "birthDate": "18.04.1958",
+        "birthPlace": "Sopot",
+        "job": "Specjalista ten analizuje dane w celu odkrycia ukrytych wzorców i zależności. Projektuje algorytmy do przetwarzania informacji, tworzy modele statystyczne i rozwija metody wnioskowania. Jego praca umożliwia podejmowanie świadomych decyzji w erze informacji."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "18.05.1992|Koszalin|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 503,
+        "name": "Tymon",
+        "surname": "Zając",
+        "birthDate": "18.05.1992",
+        "birthPlace": "Koszalin",
+        "job": "Codziennie spotyka się z grupą młodych ludzi, których zadaniem jest edukacja i wychowanie. Wprowadza ich w tajniki różnych przedmiotów, rozwija ich ciekawość świata i uczy krytycznego myślenia. Starannie przygotowuje ich do egzaminów i dalszego kształcenia."
+      },
+      {
+        "id": 2210,
+        "name": "Wiesław",
+        "surname": "Majewski",
+        "birthDate": "18.05.1992",
+        "birthPlace": "Koszalin",
+        "job": "Jego specjalność to obróbka drewna, przekształcanie go w meble, elementy architektury i dekoracje. Potrafi pracować z różnymi rodzajami drewna, stosując odpowiednie techniki, aby uzyskać pożądany efekt. Jego praca to połączenie sztuki i inżynierii."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "19.03.1966|Głogów|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 11324,
+        "name": "Leszek",
+        "surname": "Kania",
+        "birthDate": "19.03.1966",
+        "birthPlace": "Głogów",
+        "job": "Praca polega na badaniu reakcji zachodzących między różnymi pierwiastkami i związkami. Często pracuje się nad optymalizacją procesów utleniania i redukcji. Konieczne jest zrozumienie zasad termodynamiki chemicznej."
+      },
+      {
+        "id": 18868,
+        "name": "Rafał",
+        "surname": "Kaczmarczyk",
+        "birthDate": "19.03.1966",
+        "birthPlace": "Głogów",
+        "job": "Ten naukowiec zgłębia właściwości obiektów geometrycznych, przestrzeni i transformacji. Tworzy abstrakcyjne modele, które opisują kształty i ich interakcje, mając kluczowe znaczenie dla grafiki komputerowej, fizyki i inżynierii."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "19.11.1966|Brodnica|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 8002,
+        "name": "Tomasz",
+        "surname": "Milewski",
+        "birthDate": "19.11.1966",
+        "birthPlace": "Brodnica",
+        "job": "Osoba na tym stanowisku projektuje i realizuje eksperymenty, aby zgłębiać tajemnice materii. Może zajmować się badaniem procesów zachodzących w organizmach żywych lub tworzeniem nowych materiałów ochronnych. Wymaga to nie tylko wiedzy, ale i pasji do odkrywania."
+      },
+      {
+        "id": 10835,
+        "name": "Radosław",
+        "surname": "Jabłoński",
+        "birthDate": "19.11.1966",
+        "birthPlace": "Brodnica",
+        "job": "Potrafi stworzyć bezpieczną przestrzeń do rozmowy na najbardziej intymne tematy. Dzięki niej można pracować nad rozwojem osobistym, przezwyciężać traumy i budować zdrowsze nawyki. Jej narzędzia to empatia, aktywne słuchanie i rozmowa terapeutyczna."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "2.08.1997|Włocławek|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 1448,
+        "name": "Anna",
+        "surname": "Malinowska",
+        "birthDate": "2.08.1997",
+        "birthPlace": "Włocławek",
+        "job": "Głównym zadaniem jest pogłębianie zrozumienia najbardziej podstawowych procesów we wszechświecie. Analizuje zachowanie materii i energii, poszukując nowych praw. Jego prace przyczyniają się do rozwoju nauki."
+      },
+      {
+        "id": 11136,
+        "name": "Urszula",
+        "surname": "Wieczorek",
+        "birthDate": "2.08.1997",
+        "birthPlace": "Włocławek",
+        "job": "Potrafi zdiagnozować złożone problemy zdrowotne i zaproponować skuteczne metody leczenia. Jej wiedza jest fundamentem dla powrotu pacjentów do dobrej kondycji. To profesja wymagająca nieustannej nauki."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "2.09.1979|Ełk|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 8291,
+        "name": "Izabela",
+        "surname": "Włodarczyk",
+        "birthDate": "2.09.1979",
+        "birthPlace": "Ełk",
+        "job": "Osoba odpowiedzialna za wznoszenie ścian budynków, od piwnicy po poddasze. Jej narzędzia to kielnia i zaprawa, a jej materiały to cegły i bloczki. Jej praca jest esencją budowania."
+      },
+      {
+        "id": 9255,
+        "name": "Sabina",
+        "surname": "Kruk",
+        "birthDate": "2.09.1979",
+        "birthPlace": "Ełk",
+        "job": "Osoba ta tworzy skomplikowane algorytmy, które napędzają działanie aplikacji mobilnych i webowych. Analizuje problemy logiczne i przekłada je na zrozumiały dla maszyny kod, zapewniając płynne funkcjonowanie systemów informatycznych. Jej praca wymaga precyzji, cierpliwości i nieustannego uczenia się nowych technologii."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "21.09.1995|Konin|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 9706,
+        "name": "Teodora",
+        "surname": "Wrona",
+        "birthDate": "21.09.1995",
+        "birthPlace": "Konin",
+        "job": "Osoba ta zajmuje się instalacją oraz konserwacją urządzeń elektrycznych. Do jej obowiązków należy zapewnienie bezpieczeństwa funkcjonowania sieci energetycznych i doprowadzenia prądu do domów i budynków. Praca wymaga precyzji i znajomości przepisów bezpieczeństwa ze względu na ryzyko porażenia prądem."
+      },
+      {
+        "id": 20510,
+        "name": "Maja",
+        "surname": "Jaworska",
+        "birthDate": "21.09.1995",
+        "birthPlace": "Konin",
+        "job": "Ten specjalista zajmuje się analizą i prognozowaniem zjawisk ekonomicznych oraz finansowych. Stosuje metody statystyczne i modelowanie, aby zrozumieć rynki, ocenić ryzyko i tworzyć strategie inwestycyjne."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "23.05.1979|Siedlce|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 177,
+        "name": "Paweł",
+        "surname": "Kamiński",
+        "birthDate": "23.05.1979",
+        "birthPlace": "Siedlce",
+        "job": "Analizuje zmiany w składzie gatunkowym i rozmieszczeniu organizmów w czasie, badając ich adaptację do zmieniających się warunków środowiskowych. Jego obszarem zainteresowania są procesy ewolucyjne."
+      },
+      {
+        "id": 20243,
+        "name": "Maciej",
+        "surname": "Skiba",
+        "birthDate": "23.05.1979",
+        "birthPlace": "Siedlce",
+        "job": "Ten specjalista od mechaniki to ktoś, kto potrafi sprawić, że metalowe serca maszyn znów biją jak należy. Jego wiedza o układach napędowych, smarowaniu i regulacji jest podstawą jego pracy. Potrafi analizować i rozwiązywać problemy techniczne."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "23.07.1975|Białystok|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 8324,
+        "name": "Alan",
+        "surname": "Gajewski",
+        "birthDate": "23.07.1975",
+        "birthPlace": "Białystok",
+        "job": "Osoba pracująca w tej profesji zgłębia tajniki życia, badając budowę i funkcjonowanie organizmów żywych na wszystkich poziomach – od molekularnego po ekosystemowy. Analizuje materiał genetyczny, obserwuje procesy fizjologiczne i bada wzajemne zależności między gatunkami w ich naturalnych siedliskach, aby lepiej zrozumieć otaczający nas świat."
+      },
+      {
+        "id": 18400,
+        "name": "Zbigniew",
+        "surname": "Adamczyk",
+        "birthDate": "23.07.1975",
+        "birthPlace": "Białystok",
+        "job": "Ten fachowiec potrafi stworzyć z drewna meble, drzwi, okna i wiele innych elementów, które dodają domom charakteru. Jego ręce są wprawne, a oko dostrzega najmniejsze nierówności. To sztuka rzemiosła na najwyższym poziomie."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "24.12.1969|Wejherowo|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 1157,
+        "name": "Radosław",
+        "surname": "Sikora",
+        "birthDate": "24.12.1969",
+        "birthPlace": "Wejherowo",
+        "job": "Ekspert ten analizuje relacje między zmiennymi i tworzy modele opisujące ich wzajemne oddziaływanie. Jego praca nad analizą regresji i kowariancji jest kluczowa dla statystyki i ekonometrii."
+      },
+      {
+        "id": 3507,
+        "name": "Maksymilian",
+        "surname": "Sawicki",
+        "birthDate": "24.12.1969",
+        "birthPlace": "Wejherowo",
+        "job": "Jej rola w społeczeństwie polega na kształtowaniu i edukowaniu przyszłych pokoleń. Wprowadza w świat wiedzy, rozwija umiejętności i kształtuje postawy moralne. Jest filarem systemu edukacyjnego, wpływając na przyszłość kraju."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "25.11.1958|Płońsk|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 5737,
+        "name": "Edyta",
+        "surname": "Rutkowska",
+        "birthDate": "25.11.1958",
+        "birthPlace": "Płońsk",
+        "job": "Kiedy zdrowie zaczyna szwankować, ona jest pierwszą osobą, po którą sięgamy po radę.  Jej wiedza pozwala na postawienie trafnej diagnozy i zaproponowanie najlepszego planu leczenia.  To zawód pełen poświęcenia."
+      },
+      {
+        "id": 12959,
+        "name": "Teodora",
+        "surname": "Maciejewska",
+        "birthDate": "25.11.1958",
+        "birthPlace": "Płońsk",
+        "job": "Projektuje i wdraża technologie związane z ochroną środowiska i zrównoważonym rozwojem. Wymyśla rozwiązania pozwalające na redukcję zanieczyszczeń i efektywne wykorzystanie zasobów naturalnych. Jego celem jest stworzenie zdrowszego jutra."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "27.04.1973|Puławy|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 13097,
+        "name": "Rozalia",
+        "surname": "Rogowska",
+        "birthDate": "27.04.1973",
+        "birthPlace": "Puławy",
+        "job": "Prowadzi działania mające na celu wykrywanie i zapobieganie przestępstwom gospodarczym i finansowym. Jest częścią systemu, który chroni przed oszustwami i nadużyciami. Wymaga od niego wiedzy prawniczej i analitycznego myślenia."
+      },
+      {
+        "id": 15165,
+        "name": "Zofia",
+        "surname": "Kaczmarek",
+        "birthDate": "27.04.1973",
+        "birthPlace": "Puławy",
+        "job": "Specjalizuje się w montażu i konserwacji systemów odkamieniania i odsalania wody, które są stosowane w miejscach o twardej lub zasolonej wodzie. Dba o jakość wody dla przemysłu i gospodarstw domowych. Jest specjalistą od jakości wody."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "27.05.1989|Starachowice|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 14283,
+        "name": "Anna",
+        "surname": "Zielińska",
+        "birthDate": "27.05.1989",
+        "birthPlace": "Starachowice",
+        "job": "Specjalista ten pracuje nad architekturą oprogramowania, dbając o jego skalowalność i elastyczność. Projektuje ogólny kształt systemu, zapewniając jego długoterminowy rozwój i łatwość modyfikacji. To architekt cyfrowych budowli."
+      },
+      {
+        "id": 23818,
+        "name": "Leokadia",
+        "surname": "Kowalczyk",
+        "birthDate": "27.05.1989",
+        "birthPlace": "Starachowice",
+        "job": "Zajmuje się tym, aby towary poruszały się po świecie w najbardziej efektywny sposób. Planuje trasy, zarządza magazynami i dba o terminowość."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "27.09.1998|Zduńska Wola|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 4528,
+        "name": "Lidia",
+        "surname": "Rutkowska",
+        "birthDate": "27.09.1998",
+        "birthPlace": "Zduńska Wola",
+        "job": "Jest naukowcem i praktykiem jednocześnie, badającym ludzkie zachowanie i emocje, a następnie stosując tę wiedzę w praktyce terapeutycznej. Pomaga w rozwiązywaniu problemów z radzeniem sobie ze stresem, pracą i życiem rodzinnym. Jej celem jest poprawa jakości życia."
+      },
+      {
+        "id": 22937,
+        "name": "Stanisława",
+        "surname": "Wojciechowska",
+        "birthDate": "27.09.1998",
+        "birthPlace": "Zduńska Wola",
+        "job": "Zajmuje się instalacją i konserwacją systemów odpowietrzających w instalacjach wodnych i grzewczych. Dba o to, aby w systemie nie gromadziło się niepożądane powietrze, które mogłoby zakłócać jego działanie. Bez niej ogrzewanie mogłoby być mniej efektywne."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "28.02.1960|Puławy|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 749,
+        "name": "Pola",
+        "surname": "Kwiatkowska",
+        "birthDate": "28.02.1960",
+        "birthPlace": "Puławy",
+        "job": "Dba o bezpieczeństwo obywateli, reagując na zgłoszenia i patrolując ulice. Jego codziennością jest pilnowanie porządku publicznego i zapobieganie przestępczości. Często staje w obliczu trudnych sytuacji wymagających odwagi i zimnej krwi."
+      },
+      {
+        "id": 6354,
+        "name": "Liliana",
+        "surname": "Baran",
+        "birthDate": "28.02.1960",
+        "birthPlace": "Puławy",
+        "job": "Montuje i naprawia urządzenia sanitarne, takie jak prysznice, baterie czy zawory. Dba o ich estetykę i funkcjonalność. Jej praca wpływa na codzienne użytkowanie łazienek i kuchni."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "29.03.1980|Pruszków|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 1720,
+        "name": "Artur",
+        "surname": "Skiba",
+        "birthDate": "29.03.1980",
+        "birthPlace": "Pruszków",
+        "job": "Jego domeną jest obróbka drewna, dzięki czemu powstają meble, elementy dekoracyjne i konstrukcyjne. Potrafi zastosować różnorodne techniki, od cięcia po frezowanie, aby osiągnąć zamierzony efekt. Jego precyzja jest godna podziwu."
+      },
+      {
+        "id": 8770,
+        "name": "Ziemowit",
+        "surname": "Jakubowski",
+        "birthDate": "29.03.1980",
+        "birthPlace": "Pruszków",
+        "job": "Osoba ta potrafi przywrócić do dawnej świetności wszelkie mechanizmy. Jest mistrzem w desmontażu, analizie problemów i wymianie zużytych części. Jego praca sprawia, że maszyny znów jeżdżą, pracują i funkcjonują bez zarzutu."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "3.04.1989|Ustka|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 2982,
+        "name": "Eliza",
+        "surname": "Dudek",
+        "birthDate": "3.04.1989",
+        "birthPlace": "Ustka",
+        "job": "Jej misją jest pomoc ludziom w osiągnięciu harmonii psychicznej i emocjonalnej. Specjalizuje się w pracy z różnymi grupami wiekowymi, oferując wsparcie w przezwycięzaniu traum, lęków, depresji oraz wspierając rozwój osobisty. Buduje atmosferę zaufania."
+      },
+      {
+        "id": 15539,
+        "name": "Leokadia",
+        "surname": "Urbańska",
+        "birthDate": "3.04.1989",
+        "birthPlace": "Ustka",
+        "job": "Ściga przestępców, dbając o to, by nikt nie pozostał bezkarny za popełnione czyny. Przeszukuje miejsca zdarzeń, zbiera dowody i składając zeznania w sądzie. Jego celem jest utrzymanie praworządności."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "3.10.1966|Inowrocław|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 6491,
+        "name": "Łucja",
+        "surname": "Rogowska",
+        "birthDate": "3.10.1966",
+        "birthPlace": "Inowrocław",
+        "job": "Odpowiada za bezpieczeństwo w miejscach publicznych, takich jak parki, ulice czy place. Patrolowanie tych obszarów ma na celu zapobieganie popełnianiu przestępstw i zapewnienie poczucia bezpieczeństwa mieszkańcom. Jest symbolem obecności państwa."
+      },
+      {
+        "id": 13956,
+        "name": "Patrycja",
+        "surname": "Sawicka",
+        "birthDate": "3.10.1966",
+        "birthPlace": "Inowrocław",
+        "job": "Specjalista ten bada granice wiedzy, posługując się narzędziami logiki i abstrakcyjnego rozumowania. Stawia hipotezy, konstruuje dowody i tworzy nowe teorie, które poszerzają nasze horyzonty poznawcze. Jego praca jest fundamentalna dla rozwoju nauki w jej najbardziej teoretycznych aspektach."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "30.01.1997|Kraków|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 5620,
+        "name": "Łukasz",
+        "surname": "Krajewski",
+        "birthDate": "30.01.1997",
+        "birthPlace": "Kraków",
+        "job": "Kiedy czujemy się źle, to właśnie do niej kierujemy pierwsze kroki.  Jej głównym zadaniem jest zapobieganie rozwojowi chorób i łagodzenie ich skutków.  Często jest obecna przy narodzinach nowych istot i towarzyszy pacjentom w ich ostatnich chwilach."
+      },
+      {
+        "id": 9707,
+        "name": "Franciszek",
+        "surname": "Bąk",
+        "birthDate": "30.01.1997",
+        "birthPlace": "Kraków",
+        "job": "Osoba ta zajmuje się instalacją oraz konserwacją urządzeń elektrycznych. Do jej obowiązków należy zapewnienie bezpieczeństwa funkcjonowania sieci energetycznych i doprowadzenia prądu do domów i budynków. Praca wymaga precyzji i znajomości przepisów bezpieczeństwa ze względu na ryzyko porażenia prądem."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "30.07.1992|Dąbrowa Górnicza|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 16464,
+        "name": "Maciej",
+        "surname": "Chmielewski",
+        "birthDate": "30.07.1992",
+        "birthPlace": "Dąbrowa Górnicza",
+        "job": "Ta osoba potrafi przekształcić surowe drewno w piękne i funkcjonalne przedmioty. Z precyzją i cierpliwością nadaje kształt materiałowi, tworząc meble, drzwi czy elementy wykończeniowe. Jej praca wymaga zarówno umiejętności manualnych, jak i zrozumienia właściwości drewna."
+      },
+      {
+        "id": 21045,
+        "name": "Feliks",
+        "surname": "Malinowski",
+        "birthDate": "30.07.1992",
+        "birthPlace": "Dąbrowa Górnicza",
+        "job": "Tworzy narzędzia do analizy i wizualizacji danych, które pomagają w podejmowaniu strategicznych decyzji. Przetwarza surowe informacje w zrozumiałe raporty i wykresy. Jej celem jest uczynienie danych przystępnymi i użytecznymi dla biznesu."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "30.11.1998|Oświęcim|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 4529,
+        "name": "Jacek",
+        "surname": "Wróblewski",
+        "birthDate": "30.11.1998",
+        "birthPlace": "Oświęcim",
+        "job": "Jest naukowcem i praktykiem jednocześnie, badającym ludzkie zachowanie i emocje, a następnie stosując tę wiedzę w praktyce terapeutycznej. Pomaga w rozwiązywaniu problemów z radzeniem sobie ze stresem, pracą i życiem rodzinnym. Jej celem jest poprawa jakości życia."
+      },
+      {
+        "id": 16971,
+        "name": "Oliwier",
+        "surname": "Milewski",
+        "birthDate": "30.11.1998",
+        "birthPlace": "Oświęcim",
+        "job": "Ta profesja wymaga dogłębnej znajomości teorii chemicznych i metod eksperymentalnych. Osoba na tym stanowisku może zajmować się tworzeniem nowych katalizatorów, które przyspieszają reakcje przemysłowe. Ciągłe uczenie się jest kluczowe do pozostania na bieżąco z postępem."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "31.07.1974|Mysłowice|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 7626,
+        "name": "Bianka",
+        "surname": "Kwiatkowska",
+        "birthDate": "31.07.1974",
+        "birthPlace": "Mysłowice",
+        "job": "Opracowuje i ulepsza metody biotechnologiczne wykorzystujące organizmy żywe do produkcji leków, żywności lub produktów przemysłowych. Jego innowacyjne podejście ma duży wpływ na współczesną gospodarkę."
+      },
+      {
+        "id": 24348,
+        "name": "Zdzisława",
+        "surname": "Jaworska",
+        "birthDate": "31.07.1974",
+        "birthPlace": "Mysłowice",
+        "job": "Zawsze stawia pacjenta na pierwszym miejscu, wsłuchując się w jego potrzeby i obawy.  Jej działania mają na celu poprawę jakości życia i ulgę w cierpieniu.  Jest uosobieniem troski o ludzkie zdrowie."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "31.08.1950|Zielona Góra|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 4609,
+        "name": "Miłosz",
+        "surname": "Włodarczyk",
+        "birthDate": "31.08.1950",
+        "birthPlace": "Zielona Góra",
+        "job": "Jest odpowiedzialny za egzekwowanie przepisów prawa dotyczących posiadania i przewozu określonych materiałów, np. broni. Jego działania mają na celu zapewnienie bezpieczeństwa obywateli i zapobieganie potencjalnym zagrożeniom. Wymaga od niego dokładności i czujności."
+      },
+      {
+        "id": 20720,
+        "name": "Łukasz",
+        "surname": "Jankowski",
+        "birthDate": "31.08.1950",
+        "birthPlace": "Zielona Góra",
+        "job": "To osoba, która doskonale zna się na drewnie i potrafi nadać mu niepowtarzalne kształty. Jego praca polega na tworzeniu mebli, drzwi, okien i innych drewnianych elementów, które charakteryzują się wysoką jakością wykonania. Cieszy się z każdego ukończonego projektu."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "4.09.1995|Sosnowiec|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 4645,
+        "name": "Teodor",
+        "surname": "Kaczmarek",
+        "birthDate": "4.09.1995",
+        "birthPlace": "Sosnowiec",
+        "job": "Jest odpowiedzialny za egzekwowanie przepisów prawa dotyczących posiadania i przewozu określonych materiałów, np. broni. Jego działania mają na celu zapewnienie bezpieczeństwa obywateli i zapobieganie potencjalnym zagrożeniom. Wymaga od niego dokładności i czujności."
+      },
+      {
+        "id": 17943,
+        "name": "Krzysztof",
+        "surname": "Pietrzak",
+        "birthDate": "4.09.1995",
+        "birthPlace": "Sosnowiec",
+        "job": "Ten ekspert od techniki potrafi analizować działanie skomplikowanych mechanizmów i usuwać wszelkie ich niedoskonałości. Jego zadaniem jest zapewnienie płynnej i bezpiecznej pracy maszyn i pojazdów. Jego wiedza o budowie silników i układów jest fundamentalna."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "4.12.1951|Starachowice|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 11882,
+        "name": "Sebastian",
+        "surname": "Orłowski",
+        "birthDate": "4.12.1951",
+        "birthPlace": "Starachowice",
+        "job": "Pracownik ten tworzy i analizuje modele opisujące złożone systemy społeczne i ekonomiczne. Posługuje się narzędziami statystycznymi i symulacyjnymi, aby zrozumieć zachowania grup i prognozować ich przyszłość. Jego analizy pomagają w lepszym zarządzaniu."
+      },
+      {
+        "id": 19181,
+        "name": "Sebastian",
+        "surname": "Kowalski",
+        "birthDate": "4.12.1951",
+        "birthPlace": "Starachowice",
+        "job": "Ten pracownik zajmuje się instalacją i konserwacją systemów zasilania dla obiektów sportowych, takich jak stadiony czy hale widowiskowe. Montuje oświetlenie, nagłośnienie i potrzebne do funkcjonowania obiektu instalacje elektryczne. Jego praca wpływa na jakość widowisk sportowych i koncertów."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "5.02.1973|Świdnica|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 13853,
+        "name": "Monika",
+        "surname": "Nowicka",
+        "birthDate": "5.02.1973",
+        "birthPlace": "Świdnica",
+        "job": "Specjalista od wznoszenia konstrukcji budowlanych przy użyciu tradycyjnych metod. Potrafi precyzyjnie układać materiały, dbając o ich spoistość i równość. Jego praca ma przełożenie na bezpieczeństwo całej budowli."
+      },
+      {
+        "id": 17168,
+        "name": "Angelika",
+        "surname": "Kamińska",
+        "birthDate": "5.02.1973",
+        "birthPlace": "Świdnica",
+        "job": "Ta profesjonalistka stosuje naukowo opracowane techniki, aby pomóc ludziom zrozumieć siebie i przezwyciężyć trudności psychiczne. Jej praca może dotyczyć problemów z akceptacją siebie, budowaniem relacji czy radzeniem sobie z chronicznym stresem. Jest przewodnikiem do wewnętrznego spokoju."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "5.11.1989|Rybnik|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 10889,
+        "name": "Bernadeta",
+        "surname": "Sokołowska",
+        "birthDate": "5.11.1989",
+        "birthPlace": "Rybnik",
+        "job": "Potrafi szybko i skutecznie usunąć niedrożności w odpływach i kanalizacji. Wykorzystuje specjalistyczne narzędzia, takie jak przepychacze czy kamery inspekcyjne. Jej interwencje przywracają sprawność systemów odprowadzania ścieków."
+      },
+      {
+        "id": 18957,
+        "name": "Sabina",
+        "surname": "Kłos",
+        "birthDate": "5.11.1989",
+        "birthPlace": "Rybnik",
+        "job": "Ten pracownik bada teorie stojące za grami, wyborami i interakcjami między podmiotami. Tworzy modele matematyczne opisujące złożone sytuacje decyzyjne, co pomaga w zrozumieniu strategii i przewidywaniu wyników. Jego analizy są stosowane w ekonomii, politologii i sztucznej inteligencji."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "6.04.1959|Ostrowiec Świętokrzyski|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 4544,
+        "name": "Natalia",
+        "surname": "Włodarczyk",
+        "birthDate": "6.04.1959",
+        "birthPlace": "Ostrowiec Świętokrzyski",
+        "job": "Jest naukowiec pracujący z ludzką psychiką i emocjami, oferując wsparcie w rozwiązywaniu problemów. Zajmuje się diagnozowaniem i leczeniem zaburzeń psychicznych, a także terapeutyczną pracą nad rozwojem osobistym. Jest przewodnikiem do lepszego samopoczucia."
+      },
+      {
+        "id": 8760,
+        "name": "Daniela",
+        "surname": "Gacek",
+        "birthDate": "6.04.1959",
+        "birthPlace": "Ostrowiec Świętokrzyski",
+        "job": "Osoba ta potrafi przywrócić do dawnej świetności wszelkie mechanizmy. Jest mistrzem w desmontażu, analizie problemów i wymianie zużytych części. Jego praca sprawia, że maszyny znów jeżdżą, pracują i funkcjonują bez zarzutu."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "6.04.1981|Siemianowice Śląskie|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 12410,
+        "name": "Kamil",
+        "surname": "Milewski",
+        "birthDate": "6.04.1981",
+        "birthPlace": "Siemianowice Śląskie",
+        "job": "Pracuje z twardym, ale wdzięcznym materiałem, wyczarowując z niego przedmioty codziennego użytku i dzieła sztuki. Jej narzędzia to przedłużenie jej wizji i precyzji, dzięki czemu powstają wyjątkowe meble, schody czy dekoracje. To rękodzieło na najwyższym poziomie."
+      },
+      {
+        "id": 18404,
+        "name": "Radosław",
+        "surname": "Piotrowski",
+        "birthDate": "6.04.1981",
+        "birthPlace": "Siemianowice Śląskie",
+        "job": "Ten fachowiec potrafi stworzyć z drewna meble, drzwi, okna i wiele innych elementów, które dodają domom charakteru. Jego ręce są wprawne, a oko dostrzega najmniejsze nierówności. To sztuka rzemiosła na najwyższym poziomie."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "6.08.1965|Zgierz|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 12438,
+        "name": "Eryk",
+        "surname": "Wojciechowski",
+        "birthDate": "6.08.1965",
+        "birthPlace": "Zgierz",
+        "job": "Profesjonalista ten interpretuje plany techniczne i realizuje je w terenie, wznosząc fundamenty energetyki budynków. Zajmuje się także diagnostyką układów sterowania i automatyki budynkowej. Jest to praca bazująca na ścisłej współpracy z innymi ekipami budowlanymi."
+      },
+      {
+        "id": 17412,
+        "name": "Remigiusz",
+        "surname": "Krajewski",
+        "birthDate": "6.08.1965",
+        "birthPlace": "Zgierz",
+        "job": "Ta specjalistka pracuje nad zdrowiem psychicznym swoich pacjentów, pomagając im odnaleźć równowagę i spokój. Zajmuje się rozwiązywaniem konfliktów wewnętrznych, problemów z relacjami czy trudnościami w adaptacji. Jej wiedza jest fundamentem skutecznej terapii."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "7.06.1980|Nowy Sącz|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 7276,
+        "name": "Daniela",
+        "surname": "Lis",
+        "birthDate": "7.06.1980",
+        "birthPlace": "Nowy Sącz",
+        "job": "Odpowiedzialny za budowę pionowych przegród w budownictwie. Stosuje różne techniki układania materiałów, dbając o ich spoistość i dokładność. Jego praca wpływa na stabilność i wygląd całego obiektu."
+      },
+      {
+        "id": 23144,
+        "name": "Magdalena",
+        "surname": "Pawlak",
+        "birthDate": "7.06.1980",
+        "birthPlace": "Nowy Sącz",
+        "job": "Zajmuje się konserwacją systemów centralnego ogrzewania, w tym czyszczeniem wymienników ciepła i kontrolą pracy kotłów. Zapewnia optymalne funkcjonowanie systemu grzewczego przez cały rok. Jej wiedza jest cenna dla efektywności energetycznej budynków."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "7.07.1978|Olsztyn|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 15014,
+        "name": "Irmina",
+        "surname": "Kowalska",
+        "birthDate": "7.07.1978",
+        "birthPlace": "Olsztyn",
+        "job": "Specjalizuje się w ekologii, badając, jak organizmy oddziałują ze sobą i ze swoim środowiskiem, aby zrozumieć dynamikę populacji i stabilność ekosystemów. Pomaga w formułowaniu strategii ochrony przyrody."
+      },
+      {
+        "id": 16202,
+        "name": "Amelia",
+        "surname": "Wróbel",
+        "birthDate": "7.07.1978",
+        "birthPlace": "Olsztyn",
+        "job": "Ta osoba pomaga ludziom w procesie odkrywania siebie, zrozumienia swoich emocji i radzenia sobie z psychologicznymi trudnościami. Pracuje z różnymi problemami, od lęków i depresji po trudności w relacjach i adaptacji. Jest bezpiecznym powiernikiem i wsparciem."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "7.12.1982|Wałbrzych|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 10523,
+        "name": "Noemi",
+        "surname": "Gajewska",
+        "birthDate": "7.12.1982",
+        "birthPlace": "Wałbrzych",
+        "job": "Poszukuje się eksperta od przepływu materiałów, który potrafi minimalizować koszty i czas realizacji zamówień. Zajmuje się analizą potrzeb rynkowych, prognozowaniem popytu oraz projektowaniem efektywnych sieci dystrybucji."
+      },
+      {
+        "id": 10606,
+        "name": "Genowefa",
+        "surname": "Marciniak",
+        "birthDate": "7.12.1982",
+        "birthPlace": "Wałbrzych",
+        "job": "Potrafi diagnozować i naprawiać problemy związane z ciśnieniem wody w instalacjach. Zajmuje się montażem regulatorów ciśnienia i urządzeń zapobiegających jego wahaniom. Zapewnia stabilne warunki pracy urządzeń."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "7.12.1988|Nowy Sącz|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 13905,
+        "name": "Stanisława",
+        "surname": "Kowalczyk",
+        "birthDate": "7.12.1988",
+        "birthPlace": "Nowy Sącz",
+        "job": "Specjalista ten analizuje dane w celu odkrycia ukrytych wzorców i zależności. Projektuje algorytmy do przetwarzania informacji, tworzy modele statystyczne i rozwija metody wnioskowania. Jego praca umożliwia podejmowanie świadomych decyzji w erze informacji."
+      },
+      {
+        "id": 16167,
+        "name": "Grażyna",
+        "surname": "Krawczyk",
+        "birthDate": "7.12.1988",
+        "birthPlace": "Nowy Sącz",
+        "job": "Ta osoba pomaga innym zrozumieć ich własne myśli, emocje i zachowania. Pracuje z ludźmi, którzy doświadczają trudności w relacjach, cierpią z powodu stresu, lęku lub depresji. Jej celem jest wsparcie w radzeniu sobie z problemami życiowymi i poprawa samopoczucia."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "8.04.1972|Włocławek|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 1158,
+        "name": "Barbara",
+        "surname": "Bąk",
+        "birthDate": "8.04.1972",
+        "birthPlace": "Włocławek",
+        "job": "Ekspert ten analizuje relacje między zmiennymi i tworzy modele opisujące ich wzajemne oddziaływanie. Jego praca nad analizą regresji i kowariancji jest kluczowa dla statystyki i ekonometrii."
+      },
+      {
+        "id": 19154,
+        "name": "Paulina",
+        "surname": "Piotrowska",
+        "birthDate": "8.04.1972",
+        "birthPlace": "Włocławek",
+        "job": "Ten pracownik zajmuje się instalacją i konserwacją systemów kontroli dostępu oraz sygnalizacji alarmowej zasilanych prądem. Dba o prawidłowe działanie kamer, czujników i zamków elektronicznych. Wymaga to precyzyjnego podłączenia wielu komponentów."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "8.04.1984|Będzin|M",
+    "size": 2,
+    "members": [
+      {
+        "id": 388,
+        "name": "Zbigniew",
+        "surname": "Borowski",
+        "birthDate": "8.04.1984",
+        "birthPlace": "Będzin",
+        "job": "Bierze udział w tworzeniu dokumentacji technicznej i specyfikacji dla różnorodnych projektów. Jego zadaniem jest nadzorowanie prac, aby upewnić się, że są zgodne z założeniami i standardami. Odpowiedzialny za analizę danych i raportowanie postępów."
+      },
+      {
+        "id": 23789,
+        "name": "Marcel",
+        "surname": "Krajewski",
+        "birthDate": "8.04.1984",
+        "birthPlace": "Będzin",
+        "job": "Zajmuje się tworzeniem planów dla budynków, dbając o ich wygląd, ergonomię i zgodność z przepisami. Jego praca jest kluczowa dla powstania budowli, które służą ludziom przez lata. Jest artystą przemawiającym językiem linii i formy."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "8.08.1975|Ostróda|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 7590,
+        "name": "Helena",
+        "surname": "Kłos",
+        "birthDate": "8.08.1975",
+        "birthPlace": "Ostróda",
+        "job": "Opracowuje algorytmy sztucznej inteligencji, które uczą się i podejmują decyzje. Buduje systemy zdolne do rozpoznawania wzorców, przetwarzania języka naturalnego i analizy dużych zbiorów danych. Jej praca otwiera drzwi do przyszłości automatyzacji."
+      },
+      {
+        "id": 23779,
+        "name": "Sonia",
+        "surname": "Kalinowska",
+        "birthDate": "8.08.1975",
+        "birthPlace": "Ostróda",
+        "job": "Zajmuje się tworzeniem planów dla budynków, dbając o ich wygląd, ergonomię i zgodność z przepisami. Jego praca jest kluczowa dla powstania budowli, które służą ludziom przez lata. Jest artystą przemawiającym językiem linii i formy."
+      }
+    ]
+  },
+  {
+    "keyLabel": "birthDate|birthPlace|gender",
+    "key": "9.01.1952|Mysłowice|F",
+    "size": 2,
+    "members": [
+      {
+        "id": 9961,
+        "name": "Krystyna",
+        "surname": "Kwiatkowska",
+        "birthDate": "9.01.1952",
+        "birthPlace": "Mysłowice",
+        "job": "Osoba wykonująca ten zawód ma kluczową rolę w przekazywaniu wiedzy i kształtowaniu przyszłych pokoleń. Dba o rozwój intelektualny i społeczny swoich podopiecznych, inspirując ich do nauki. Jest wsparciem w ich edukacyjnej podróży."
+      },
+      {
+        "id": 18738,
+        "name": "Kinga",
+        "surname": "Czajkowska",
+        "birthDate": "9.01.1952",
+        "birthPlace": "Mysłowice",
+        "job": "Ten naukowiec buduje modele teoretyczne opisujące sieci, systemy i ich wzajemne powiązania. Analizuje dynamikę przepływów, rozprzestrzeniania się informacji czy zależności między elementami w złożonych układach."
+      }
+    ]
+  }
+]

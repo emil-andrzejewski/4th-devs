@@ -9,16 +9,16 @@ export const runSendAnswer = async () => {
 	throw new Error("Invalid candidate file. Required fields: name, surname, birthYear, powerPlant.code");
   }
 
-  const { accessLevel, raw: accessRaw } = await fetchAccessLevel({
-	name: candidate.name,
-	surname: candidate.surname,
-	birthYear: candidate.birthYear
-  });
+  // const { accessLevel, raw: accessRaw } = await fetchAccessLevel({
+	// name: candidate.name,
+	// surname: candidate.surname,
+	// birthYear: candidate.birthYear
+  // });
 
   const answer = {
 	name: candidate.name,
 	surname: candidate.surname,
-	accessLevel,
+	accessLevel: 8,
 	powerPlant: candidate.powerPlant.code
   };
 

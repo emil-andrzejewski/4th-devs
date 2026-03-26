@@ -1,61 +1,9 @@
 [
   {
-    "name": "Cezary",
-    "surname": "Żurek",
+    "name": "Martin",
+    "surname": "Handford",
     "gender": "M",
-    "born": 1987,
-    "city": "Grudziądz",
-    "tags": [
-      "transport"
-    ]
-  },
-  {
-    "name": "Jacek",
-    "surname": "Nowak",
-    "gender": "M",
-    "born": 1991,
-    "city": "Grudziądz",
-    "tags": [
-      "transport",
-      "praca z ludźmi"
-    ]
-  },
-  {
-    "name": "Oskar",
-    "surname": "Sieradzki",
-    "gender": "M",
-    "born": 1993,
-    "city": "Grudziądz",
-    "tags": [
-      "transport",
-      "praca z ludźmi"
-    ]
-  },
-  {
-    "name": "Wojciech",
-    "surname": "Bielik",
-    "gender": "M",
-    "born": 1986,
-    "city": "Grudziądz",
-    "tags": [
-      "transport"
-    ]
-  },
-  {
-    "name": "Wacław",
-    "surname": "Jasiński",
-    "gender": "M",
-    "born": 1986,
-    "city": "Grudziądz",
-    "tags": [
-      "transport"
-    ]
-  },
-  {
-    "name": "Jolanta",
-    "surname": "Kornatowska",
-    "gender": "F",
-    "born": 1993,
+    "born": 1956,
     "city": "Grudziądz",
     "tags": [
       "transport"
