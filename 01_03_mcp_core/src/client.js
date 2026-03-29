@@ -23,13 +23,42 @@ import { dirname, join } from "path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+const isTruthy = (value) => ["1", "true", "yes", "on"].includes(String(value).toLowerCase());
+
+const toDebugMode = (value) => (String(value).toLowerCase() === "inspect" ? "inspect" : "inspect-brk");
+
+const toDebugPort = (value) => {
+  const port = Number(value);
+  return Number.isInteger(port) && port > 0 && port <= 65535 ? port : 9230;
+};
+
+const resolveServerDebugArg = ({ debugServer, debugMode, debugPort } = {}) => {
+  const enabled = debugServer ?? isTruthy(process.env.MCP_SERVER_INSPECT);
+  if (!enabled) return null;
+
+  const mode = toDebugMode(debugMode ?? process.env.MCP_SERVER_INSPECT_MODE ?? "brk");
+  const port = toDebugPort(debugPort ?? process.env.MCP_SERVER_INSPECT_PORT ?? "9230");
+
+  return `--${mode}=127.0.0.1:${port}`;
+};
+
 /**
  * @param {object} options
  * @param {string} options.model — model for sampling completions
  * @param {string} options.serverPath — path to server script (default: ./server.js)
  * @param {function} options.onElicitation — custom elicitation handler (default: auto-accept)
+ * @param {boolean} options.debugServer — enable Node inspector for spawned server
+ * @param {"inspect"|"brk"|"inspect-brk"} options.debugMode — inspector mode (default: brk)
+ * @param {number|string} options.debugPort — inspector port (default: 9230)
  */
-export const createMcpClient = async ({ model, serverPath, onElicitation } = {}) => {
+export const createMcpClient = async ({
+  model,
+  serverPath,
+  onElicitation,
+  debugServer,
+  debugMode,
+  debugPort
+} = {}) => {
   const client = new Client(
     { name: "mcp-core-client", version: "1.0.0" },
     {
@@ -46,11 +75,15 @@ export const createMcpClient = async ({ model, serverPath, onElicitation } = {})
 
   // Spawn the server as a child process and connect over stdio
   const resolvedPath = serverPath || join(__dirname, "server.js");
+  const debugArg = resolveServerDebugArg({ debugServer, debugMode, debugPort });
+  const serverArgs = debugArg ? [debugArg, resolvedPath] : [resolvedPath];
+
   clientLog.spawningServer(resolvedPath);
+  if (debugArg) clientLog.serverDebugEnabled(debugArg);
 
   const transport = new StdioClientTransport({
     command: "node",
-    args: [resolvedPath],
+    args: serverArgs,
     stderr: "inherit"
   });
 

@@ -8,6 +8,33 @@ Core MCP capabilities over stdio: tools, resources, prompts, elicitation, and sa
 npm run lesson3:mcp_core
 ```
 
+## Debug server.js (spawned by client)
+
+`client.js` can start the server with Node inspector enabled, so you can attach a debugger to the spawned `src/server.js` process.
+
+```bash
+# break on first line in server process (default port 9230)
+npm run start:debug-server
+
+# do not break on first line (wait for your breakpoint)
+npm run start:debug-server:inspect
+```
+
+You can also use env vars directly:
+
+```bash
+# 1/true/yes/on enables debugger
+MCP_SERVER_INSPECT=1
+
+# optional: "brk" (default) or "inspect"
+MCP_SERVER_INSPECT_MODE=brk
+
+# optional: custom port (default 9230)
+MCP_SERVER_INSPECT_PORT=9230
+```
+
+Then attach your IDE debugger to `127.0.0.1:9230` (or your custom port).
+
 ## What it does
 
 1. Spawns a local MCP server as a subprocess over stdio

@@ -5,7 +5,9 @@
   "description": "Comprehensive MCP server demonstrating tools, prompts, resources, elicitation, and sampling",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "start:debug-server": "set MCP_SERVER_INSPECT=1&& node app.js",
+    "start:debug-server:inspect": "set MCP_SERVER_INSPECT=1&& set MCP_SERVER_INSPECT_MODE=inspect&& node app.js"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.1",

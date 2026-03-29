@@ -9,6 +9,7 @@ const run = async () => {
     people,
     (person) => `${person.birthDate}|${person.job}|${person.gender}`,
     "birthDate|job|gender"
+  )
 
   await writeJson(paths.groupsBirthDateJob, groups);
   console.log(`[find-2] Saved ${groups.length} groups to ${paths.groupsBirthDateJob}`);

@@ -56,6 +56,9 @@ export const clientLog = {
   spawningServer: (serverPath) => {
     console.log(`\n${c.green}🚀 Spawning MCP server: ${serverPath}${c.reset}`);
   },
+  serverDebugEnabled: (debugArg) => {
+    console.log(`${c.yellow}🐞 Server debugger enabled (${debugArg})${c.reset}`);
+  },
   connected: () => {
     console.log(`${c.green}✓ Connected to MCP server via stdio${c.reset}`);
   },
