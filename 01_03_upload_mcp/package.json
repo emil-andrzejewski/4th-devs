@@ -9,7 +9,7 @@
     "dev": "node --watch app.js"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.12.1",
+    "@modelcontextprotocol/sdk": "1.26.0",
     "consola": "^3.4.0",
     "openai": "^4.104.0"
   },
