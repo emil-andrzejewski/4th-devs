@@ -31,6 +31,36 @@ export const extractResponseText = (response) => {
   return extractTextFromMessageContent(messageItem?.content);
 };
 
+const getUsageOutputTokens = (response) => {
+  const outputTokens = response?.usage?.output_tokens;
+  return Number.isInteger(outputTokens) ? outputTokens : null;
+};
+
+const getOutputPreview = (response, maxChars = 180) => {
+  const text = extractResponseText(response);
+  if (!text) return "";
+  return text.length > maxChars ? `${text.slice(0, maxChars)}...` : text;
+};
+
+export const getResponseCompletionInfo = (response) => {
+  const status = typeof response?.status === "string" ? response.status : null;
+  const incompleteReason = response?.incomplete_details?.reason ?? null;
+  const usageOutputTokens = getUsageOutputTokens(response);
+
+  const maxOutputTokensReached = (
+    incompleteReason === "max_output_tokens"
+    || (status === "incomplete" && incompleteReason === "max_output_tokens")
+  );
+
+  return {
+    status,
+    incompleteReason,
+    usageOutputTokens,
+    maxOutputTokensReached,
+    outputPreview: getOutputPreview(response)
+  };
+};
+
 export const createResponse = async ({ input, tools }) => {
   const body = responses.buildResponsesRequest({
     model: llm.model,

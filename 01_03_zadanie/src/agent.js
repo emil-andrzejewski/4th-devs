@@ -1,5 +1,10 @@
 import { llm } from "./config.js";
-import { createResponse, extractResponseText, extractToolCalls } from "./llm.js";
+import {
+  createResponse,
+  extractResponseText,
+  extractToolCalls,
+  getResponseCompletionInfo
+} from "./llm.js";
 import { createPackageToolHandlers, formatToolOutput, packageTools } from "./packages.js";
 
 const parseToolArgs = (toolCall) => {
@@ -74,6 +79,19 @@ export const createAgent = ({ log }) => {
         input: sessionState.messages,
         tools: packageTools
       });
+
+      const completionInfo = getResponseCompletionInfo(response);
+      if (completionInfo.maxOutputTokensReached) {
+        log("llm.max_output_tokens_reached", {
+          sessionID,
+          round,
+          maxOutputTokens: llm.maxOutputTokens,
+          outputTokens: completionInfo.usageOutputTokens,
+          status: completionInfo.status,
+          reason: completionInfo.incompleteReason,
+          outputPreview: completionInfo.outputPreview
+        });
+      }
 
       sessionState.messages.push(...(response.output ?? []));
 
