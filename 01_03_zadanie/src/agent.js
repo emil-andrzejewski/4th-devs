@@ -22,6 +22,45 @@ const createSessionState = () => ({
   createdAt: new Date().toISOString()
 });
 
+const PACKAGE_ID_REGEX = /\bPKG\d{8}\b/gi;
+const REACTOR_CONTEXT_KEYWORDS = [
+  "reaktor",
+  "reaktora",
+  "rdzen",
+  "rdzeni",
+  "rdzeniami",
+  "paliw",
+  "kaset",
+  "radioakty",
+  "reactor",
+  "core",
+  "fuel"
+];
+
+const normalizeForSearch = (value) =>
+  value
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase();
+
+const extractMentionedPackageIds = (message) => {
+  if (typeof message !== "string" || !message.trim()) {
+    return [];
+  }
+
+  const matches = message.match(PACKAGE_ID_REGEX) ?? [];
+  return [...new Set(matches.map((id) => id.toUpperCase()))];
+};
+
+const messageContainsReactorContext = (message) => {
+  if (typeof message !== "string" || !message.trim()) {
+    return false;
+  }
+
+  const normalized = normalizeForSearch(message);
+  return REACTOR_CONTEXT_KEYWORDS.some((keyword) => normalized.includes(keyword));
+};
+
 const WEB_SEARCH_KEYWORDS = [
   "pogoda",
   "weather",
@@ -100,9 +139,37 @@ export const createAgent = ({ log }) => {
     return outputs;
   };
 
+  const applyReactorHintsFromMessage = ({ sessionID, sessionState, message }) => {
+    const packageIds = extractMentionedPackageIds(message);
+    if (packageIds.length === 0 || !messageContainsReactorContext(message)) {
+      return;
+    }
+
+    const hintedAt = new Date().toISOString();
+    const hintMessage = message.length > 220 ? `${message.slice(0, 220)}...` : message;
+
+    for (const packageId of packageIds) {
+      const previous = sessionState.packages.get(packageId) ?? {};
+      sessionState.packages.set(packageId, {
+        ...previous,
+        hintedReactor: true,
+        hintSource: "operator_message",
+        hintedAt,
+        hintMessage
+      });
+    }
+
+    log("session.reactor_hint", {
+      sessionID,
+      packageIds,
+      source: "operator_message"
+    });
+  };
+
   const processOperatorMessage = async ({ sessionID, msg }) => {
     const sessionState = getSession(sessionID);
     sessionState.messages.push({ role: "user", content: msg });
+    applyReactorHintsFromMessage({ sessionID, sessionState, message: msg });
     const webSearchEnabled = shouldUseWebSearch(msg);
 
     log("operator.message", {

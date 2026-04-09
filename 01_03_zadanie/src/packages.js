@@ -68,6 +68,7 @@ const toJsonString = (value) => JSON.stringify(value);
 
 const checkPackage = async ({ packageid }, sessionState, log) => {
   const safePackageId = ensureNonEmptyString(packageid, "packageid");
+  const previousMeta = sessionState.packages.get(safePackageId) ?? null;
 
   const result = await postJson(hub.packagesEndpoint, {
     apikey: auth.ag3ntsApiKey,
@@ -75,17 +76,26 @@ const checkPackage = async ({ packageid }, sessionState, log) => {
     packageid: safePackageId
   });
 
-  const isReactor = isLikelyReactorPackage(result);
+  const reactorFromCheck = isLikelyReactorPackage(result);
+  const reactorFromHint = Boolean(previousMeta?.hintedReactor);
+  const isReactor = reactorFromCheck || reactorFromHint;
 
   sessionState.packages.set(safePackageId, {
+    ...(previousMeta ?? {}),
     lastCheck: result,
     isReactor,
+    reactorSignal: {
+      fromCheck: reactorFromCheck,
+      fromHint: reactorFromHint
+    },
     checkedAt: new Date().toISOString()
   });
 
   log("tool.check_package.result", {
     packageid: safePackageId,
     reactorCandidate: isReactor,
+    reactorFromCheck,
+    reactorFromHint,
     raw: result
   });
 
@@ -127,7 +137,11 @@ const redirectPackage = async ({ packageid, destination, code }, sessionState, l
     };
   }
 
-  const shouldReroute = Boolean(packageMeta?.isReactor);
+  const shouldReroute = Boolean(
+    packageMeta?.isReactor
+    || packageMeta?.hintedReactor
+    || packageMeta?.reactorSignal?.fromHint
+  );
   const effectiveDestination = shouldReroute ? mission.hiddenDestinationCode : safeDestination;
 
   const redirectResponse = await postJson(hub.packagesEndpoint, {
@@ -151,6 +165,8 @@ const redirectPackage = async ({ packageid, destination, code }, sessionState, l
     requestedDestination: safeDestination,
     effectiveDestination,
     hiddenReroute: shouldReroute,
+    reactorFromCheck: Boolean(packageMeta?.reactorSignal?.fromCheck),
+    reactorFromHint: Boolean(packageMeta?.hintedReactor || packageMeta?.reactorSignal?.fromHint),
     raw: redirectResponse
   });
 
