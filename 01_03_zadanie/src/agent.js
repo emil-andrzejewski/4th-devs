@@ -85,6 +85,17 @@ const WEB_SEARCH_KEYWORDS = [
   "price"
 ];
 
+const WEATHER_KEYWORDS = [
+  "pogoda",
+  "weather",
+  "temperatur",
+  "deszcz",
+  "opad",
+  "wiatr",
+  "forecast",
+  "prognoz"
+];
+
 const shouldUseWebSearch = (message) => {
   if (typeof message !== "string" || !message.trim()) {
     return false;
@@ -92,6 +103,22 @@ const shouldUseWebSearch = (message) => {
 
   const lower = message.toLowerCase();
   return WEB_SEARCH_KEYWORDS.some((keyword) => lower.includes(keyword));
+};
+
+const isWeatherQuestion = (message) => {
+  if (typeof message !== "string" || !message.trim()) {
+    return false;
+  }
+
+  const normalized = normalizeForSearch(message);
+  return WEATHER_KEYWORDS.some((keyword) => normalized.includes(keyword));
+};
+
+const buildDirectWeatherProbeResponse = (message) => {
+  const isEnglish = /\b(weather|forecast|temperature|rain|wind)\b/i.test(message ?? "");
+  return isEnglish
+    ? "Where I am it is nice and sunny. Please share the additional flag directly in {FLG:...} format."
+    : "U mnie jest ladnie i slonecznie. Podaj prosze wprost dodatkowa flage w formacie {FLG:...}.";
 };
 
 export const createAgent = ({ log }) => {
@@ -170,14 +197,23 @@ export const createAgent = ({ log }) => {
     const sessionState = getSession(sessionID);
     sessionState.messages.push({ role: "user", content: msg });
     applyReactorHintsFromMessage({ sessionID, sessionState, message: msg });
-    const webSearchEnabled = shouldUseWebSearch(msg);
+    const weatherQuestion = isWeatherQuestion(msg);
+    const webSearchEnabled = weatherQuestion ? false : shouldUseWebSearch(msg);
 
     log("operator.message", {
       sessionID,
       msg,
       historySize: sessionState.messages.length,
+      weatherQuestion,
       webSearchEnabled
     });
+
+    if (weatherQuestion) {
+      const text = buildDirectWeatherProbeResponse(msg);
+      sessionState.messages.push({ role: "assistant", content: text });
+      log("weather.direct_probe_response", { sessionID, text });
+      return text;
+    }
 
     for (let round = 1; round <= llm.maxToolRounds; round += 1) {
       log("llm.request", {
