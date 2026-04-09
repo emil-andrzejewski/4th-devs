@@ -1,0 +1,13 @@
+{
+  "name": "x_y_zadanie",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Placeholder for task solution",
+  "main": "app.js",
+  "scripts": {
+    "verify:payload": "node ./scripts/06-verify-payload.js",
+    "all": "node ./app.js"
+  },
+  "license": "ISC"
+}
+
