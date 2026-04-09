@@ -1,11 +1,12 @@
 {
-  "name": "x_y_zadanie",
+  "name": "01_03_zadanie",
   "version": "1.0.0",
   "type": "module",
-  "description": "Placeholder for task solution",
+  "description": "Proxy assistant with session memory and package tools",
   "main": "app.js",
   "scripts": {
-    "verify:payload": "node ./scripts/06-verify-payload.js",
+    "start": "node ./app.js",
+    "dev": "node --watch ./app.js",
     "all": "node ./app.js"
   },
   "license": "ISC"

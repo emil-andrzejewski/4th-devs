@@ -20,12 +20,22 @@ const getErrorMessage = async (response) => {
   }
 };
 
-export const requestJson = async (url, { method = "GET", body, headers } = {}) => {
+export const requestJson = async (
+  url,
+  {
+    method = "GET",
+    body,
+    headers,
+    timeoutMs = hub.timeoutMs,
+    retries = hub.retries,
+    retryDelayMs = hub.retryDelayMs
+  } = {}
+) => {
   let lastError;
 
-  for (let attempt = 0; attempt < hub.retries; attempt += 1) {
+  for (let attempt = 0; attempt < retries; attempt += 1) {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), hub.timeoutMs);
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
     try {
       const response = await fetch(url, {
@@ -47,21 +57,21 @@ export const requestJson = async (url, { method = "GET", body, headers } = {}) =
       const message = await getErrorMessage(response);
       lastError = new Error(`${method} ${url} failed (${response.status}): ${message}`);
 
-      if (!isRetryable(response.status) || attempt === hub.retries - 1) {
+      if (!isRetryable(response.status) || attempt === retries - 1) {
         throw lastError;
       }
     } catch (error) {
       clearTimeout(timeoutId);
       lastError = error.name === "AbortError"
-        ? new Error(`${method} ${url} timed out after ${hub.timeoutMs}ms`)
+        ? new Error(`${method} ${url} timed out after ${timeoutMs}ms`)
         : error;
 
-      if (attempt === hub.retries - 1) {
+      if (attempt === retries - 1) {
         throw lastError;
       }
     }
 
-    const delay = hub.retryDelayMs * 2 ** attempt;
+    const delay = retryDelayMs * 2 ** attempt;
     await sleep(delay);
   }
 

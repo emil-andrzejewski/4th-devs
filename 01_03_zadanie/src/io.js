@@ -1,17 +1,42 @@
-import path from "node:path";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+export class HttpError extends Error {
+  constructor(status, message) {
+    super(message);
+    this.name = "HttpError";
+    this.status = status;
+  }
+}
 
-export const readJsonFile = async (filePath, label = filePath) => {
-  const raw = await readFile(filePath, "utf8");
+export const isNonEmptyString = (value) =>
+  typeof value === "string" && value.trim().length > 0;
+
+export const parseJsonBody = async (req, { maxBytes }) => {
+  let totalBytes = 0;
+  const chunks = [];
+
+  for await (const chunk of req) {
+    totalBytes += chunk.length;
+
+    if (totalBytes > maxBytes) {
+      throw new HttpError(413, "Request body too large");
+    }
+
+    chunks.push(chunk);
+  }
+
+  if (chunks.length === 0) {
+    throw new HttpError(400, "Request body is required");
+  }
+
+  const rawBody = Buffer.concat(chunks).toString("utf8");
 
   try {
-    return JSON.parse(raw);
-  } catch (error) {
-    throw new Error(`Invalid JSON in ${label}: ${error.message}`);
+    return JSON.parse(rawBody);
+  } catch {
+    throw new HttpError(400, "Invalid JSON payload");
   }
 };
 
-export const writeJsonFile = async (filePath, data) => {
-  await mkdir(path.dirname(filePath), { recursive: true });
-  await writeFile(filePath, `${JSON.stringify(data, null, 2)}\n`, "utf8");
+export const sendJson = (res, status, data) => {
+  res.writeHead(status, { "Content-Type": "application/json; charset=utf-8" });
+  res.end(`${JSON.stringify(data)}\n`);
 };
