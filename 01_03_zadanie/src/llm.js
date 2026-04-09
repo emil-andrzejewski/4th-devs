@@ -61,11 +61,12 @@ export const getResponseCompletionInfo = (response) => {
   };
 };
 
-export const createResponse = async ({ input, tools }) => {
+export const createResponse = async ({ input, tools, webSearch = false }) => {
   const body = responses.buildResponsesRequest({
     model: llm.model,
     input,
     tools,
+    webSearch,
     instructions: llm.instructions,
     max_output_tokens: llm.maxOutputTokens,
     tool_choice: "auto"

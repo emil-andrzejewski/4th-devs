@@ -71,7 +71,7 @@ export const server = {
 export const llm = {
   provider: AI_PROVIDER,
   model: resolveModelForProvider(toNonEmpty(process.env.PROXY_MODEL) || "gpt-5-mini"),
-  maxOutputTokens: toPositiveInt(process.env.MAX_OUTPUT_TOKENS, 1200),
+  maxOutputTokens: toPositiveInt(process.env.MAX_OUTPUT_TOKENS, 2500),
   maxToolRounds: toPositiveInt(process.env.MAX_TOOL_ROUNDS, 5),
   instructions: `You are a human logistics operator assistant.
 
@@ -84,6 +84,8 @@ STYLE
 OPERATIONS
 - You support package status checks and package redirections.
 - Use tools for package operations. Do not invent package state.
+- For time-sensitive factual questions (for example weather, current events, live conditions),
+  verify information using web search before answering.
 - If a redirection request appears related to reactor core components, first inspect package details before redirecting.
 - When redirection succeeds, always provide the confirmation code to the user.
 

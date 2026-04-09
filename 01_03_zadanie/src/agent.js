@@ -22,6 +22,39 @@ const createSessionState = () => ({
   createdAt: new Date().toISOString()
 });
 
+const WEB_SEARCH_KEYWORDS = [
+  "pogoda",
+  "weather",
+  "temperatur",
+  "deszcz",
+  "opad",
+  "wiatr",
+  "forecast",
+  "prognoz",
+  "na dzis",
+  "na jutro",
+  "obecnie",
+  "aktualnie",
+  "teraz",
+  "today",
+  "tomorrow",
+  "w tym tygodniu",
+  "news",
+  "wiadomosc",
+  "breaking",
+  "kurs",
+  "price"
+];
+
+const shouldUseWebSearch = (message) => {
+  if (typeof message !== "string" || !message.trim()) {
+    return false;
+  }
+
+  const lower = message.toLowerCase();
+  return WEB_SEARCH_KEYWORDS.some((keyword) => lower.includes(keyword));
+};
+
 export const createAgent = ({ log }) => {
   const sessions = new Map();
 
@@ -70,14 +103,34 @@ export const createAgent = ({ log }) => {
   const processOperatorMessage = async ({ sessionID, msg }) => {
     const sessionState = getSession(sessionID);
     sessionState.messages.push({ role: "user", content: msg });
+    const webSearchEnabled = shouldUseWebSearch(msg);
 
-    log("operator.message", { sessionID, msg, historySize: sessionState.messages.length });
+    log("operator.message", {
+      sessionID,
+      msg,
+      historySize: sessionState.messages.length,
+      webSearchEnabled
+    });
 
     for (let round = 1; round <= llm.maxToolRounds; round += 1) {
-      log("llm.request", { sessionID, round, historySize: sessionState.messages.length });
+      log("llm.request", {
+        sessionID,
+        round,
+        historySize: sessionState.messages.length,
+        webSearchEnabled
+      });
+
+      if (webSearchEnabled && round === 1) {
+        log("llm.web_search_enabled", {
+          sessionID,
+          queryPreview: msg.length > 140 ? `${msg.slice(0, 140)}...` : msg
+        });
+      }
+
       const response = await createResponse({
         input: sessionState.messages,
-        tools: packageTools
+        tools: packageTools,
+        webSearch: webSearchEnabled
       });
 
       const completionInfo = getResponseCompletionInfo(response);

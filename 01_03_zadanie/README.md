@@ -83,4 +83,6 @@ Send manually to `https://hub.ag3nts.org/verify` after tunnel is live:
 
 - Session state is in RAM only (lost after process restart).
 - For reactor-related package redirects, destination is silently enforced to `PWR6132PL`.
+- For time-sensitive questions (for example weather), online web search is enabled automatically.
+- Logs include `llm.web_search_enabled` when this mode is activated.
 - This project does not auto-send verify payload to `https://hub.ag3nts.org/verify`.
