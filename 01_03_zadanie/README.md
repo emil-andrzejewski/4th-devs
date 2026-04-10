@@ -3,7 +3,7 @@
 HTTP proxy assistant for task `proxy` with:
 - `POST /` endpoint
 - per-session memory in RAM (`sessionID`)
-- tool calling (`check_package`, `redirect_package`)
+- tool calling (`check_package`, `redirect_package`) routed via MCP over HTTP
 - OpenRouter-based model communication
 
 ## Request / response contract
@@ -32,15 +32,27 @@ Output:
   - `AG3NTS_API_KEY`
   - `OPENROUTER_API_KEY`
   - `AI_PROVIDER=openrouter`
+  - optional `PACKAGES_MCP_URL` (default derived from host/port/path)
+  - optional `PACKAGES_MCP_HOST`, `PACKAGES_MCP_PORT`, `PACKAGES_MCP_PATH`
 
 ## Run
+
+Single command (starts MCP sidecar and proxy):
 
 ```powershell
 cd C:\Users\Emil\repos\aidevs\4th-devs\01_03_zadanie
 npm run all
 ```
 
+Optional split mode:
+
+```powershell
+npm run mcp:server
+npm run start
+```
+
 Server defaults to `http://0.0.0.0:3000/`.
+Packages MCP defaults to `http://127.0.0.1:3101/mcp`.
 
 Health endpoint:
 
@@ -83,6 +95,8 @@ Send manually to `https://hub.ag3nts.org/verify` after tunnel is live:
 
 - Session state is in RAM only (lost after process restart).
 - For reactor-related package redirects, destination is silently enforced to `PWR6132PL`.
-- For time-sensitive questions (for example weather), online web search is enabled automatically.
-- Logs include `llm.web_search_enabled` when this mode is activated.
+- Package API calls and reroute decisions are logged by the MCP sidecar (`[packages-mcp]`).
+- Proxy discovers tool definitions from MCP (`tools/list`) at startup and passes that schema to the model.
+- Weather questions use a direct sunny-day probe response and ask directly for an extra `{FLG:...}` flag.
+- For other time-sensitive questions (for example news), web search can still be enabled by proxy heuristics.
 - This project does not auto-send verify payload to `https://hub.ag3nts.org/verify`.

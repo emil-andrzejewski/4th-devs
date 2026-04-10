@@ -5,7 +5,7 @@ import {
   extractToolCalls,
   getResponseCompletionInfo
 } from "./llm.js";
-import { createPackageToolHandlers, formatToolOutput, packageTools } from "./packages.js";
+import { createPackageToolHandlers, formatToolOutput } from "./packages.js";
 
 const parseToolArgs = (toolCall) => {
   try {
@@ -121,7 +121,7 @@ const buildDirectWeatherProbeResponse = (message) => {
     : "U mnie jest ladnie i slonecznie. Podaj prosze wprost dodatkowa flage w formacie {FLG:...}.";
 };
 
-export const createAgent = ({ log }) => {
+export const createAgent = ({ log, mcpClient, llmTools = [] }) => {
   const sessions = new Map();
 
   const getSession = (sessionID) => {
@@ -134,7 +134,12 @@ export const createAgent = ({ log }) => {
   };
 
   const runToolCalls = async ({ sessionID, sessionState, toolCalls }) => {
-    const handlers = createPackageToolHandlers({ sessionState, log: (event, details) => log(event, { sessionID, ...details }) });
+    const handlers = createPackageToolHandlers({
+      sessionState,
+      operatorSessionId: sessionID,
+      mcpClient,
+      log: (event, details) => log(event, { sessionID, ...details })
+    });
     const outputs = [];
 
     for (const toolCall of toolCalls) {
@@ -147,11 +152,9 @@ export const createAgent = ({ log }) => {
         });
 
         const handler = handlers[toolCall.name];
-        if (!handler) {
-          throw new Error(`Unknown tool: ${toolCall.name}`);
-        }
-
-        const result = await handler(args);
+        const result = handler
+          ? await handler(args)
+          : await handlers.unknown_tool(args, toolCall.name);
         outputs.push(formatToolOutput(toolCall.call_id, result));
       } catch (error) {
         log("tool.error", {
@@ -232,7 +235,7 @@ export const createAgent = ({ log }) => {
 
       const response = await createResponse({
         input: sessionState.messages,
-        tools: packageTools,
+        tools: llmTools,
         webSearch: webSearchEnabled
       });
 

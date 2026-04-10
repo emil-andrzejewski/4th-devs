@@ -17,6 +17,12 @@ const toPositiveInt = (value, fallback) => {
   return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
 };
 
+const normalizeHttpPath = (value, fallback) => {
+  const trimmed = toNonEmpty(value);
+  if (!trimmed) return fallback;
+  return trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
+};
+
 const ag3ntsApiKey = toNonEmpty(process.env.AG3NTS_API_KEY);
 const openRouterApiKey = toNonEmpty(process.env.OPENROUTER_API_KEY);
 const aiProvider = toNonEmpty(process.env.AI_PROVIDER).toLowerCase();
@@ -66,6 +72,15 @@ export const server = {
   host: toNonEmpty(process.env.HOST) || "0.0.0.0",
   port: toPositiveInt(process.env.PORT, 3000),
   maxBodyBytes: toPositiveInt(process.env.MAX_BODY_BYTES, 128 * 1024)
+};
+
+const mcpHost = toNonEmpty(process.env.PACKAGES_MCP_HOST) || "127.0.0.1";
+const mcpPort = toPositiveInt(process.env.PACKAGES_MCP_PORT, 3101);
+const mcpPath = normalizeHttpPath(process.env.PACKAGES_MCP_PATH, "/mcp");
+const defaultMcpPackagesUrl = `http://${mcpHost}:${mcpPort}${mcpPath}`;
+
+export const mcp = {
+  packagesUrl: toNonEmpty(process.env.PACKAGES_MCP_URL) || defaultMcpPackagesUrl
 };
 
 export const llm = {

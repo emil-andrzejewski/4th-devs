@@ -5,9 +5,14 @@
   "description": "Proxy assistant with session memory and package tools",
   "main": "app.js",
   "scripts": {
+    "mcp:server": "node ./mcp-server.js",
     "start": "node ./app.js",
     "dev": "node --watch ./app.js",
-    "all": "node ./app.js"
+    "all": "node ./run-all.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.24.3",
+    "zod": "^3.25.76"
   },
   "license": "ISC"
 }
