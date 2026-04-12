@@ -11,7 +11,7 @@
     },
     "uploadthing": {
       "transport": "http",
-      "url": "https://uploadthing-mcp.adam-996.workers.dev/mcp"
+      "url": "http://localhost:3000/mcp"
     }
   }
 }
