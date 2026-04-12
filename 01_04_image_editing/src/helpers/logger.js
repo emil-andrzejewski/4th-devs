@@ -19,8 +19,7 @@ const colors = {
 
 const timestamp = () => new Date().toLocaleTimeString("en-US", { hour12: false });
 const truncate = (value, max) => {
-  const text = String(value ?? "");
-  return text.length > max ? `${text.substring(0, max)}...` : text;
+  return text;
 };
 
 const log = {
@@ -29,7 +28,7 @@ const log = {
   error: (title, msg) => console.log(`${colors.dim}[${timestamp()}]${colors.reset} ${colors.red}✗ ${title}${colors.reset} ${msg || ""}`),
   warn: (msg) => console.log(`${colors.dim}[${timestamp()}]${colors.reset} ${colors.yellow}⚠${colors.reset} ${msg}`),
   start: (msg) => console.log(`${colors.dim}[${timestamp()}]${colors.reset} ${colors.cyan}→${colors.reset} ${msg}`),
-  
+
   box: (text) => {
     const lines = text.split("\n");
     const width = Math.max(...lines.map(l => l.length)) + 4;
@@ -50,7 +49,7 @@ const log = {
 
   query: (q) => console.log(`\n${colors.bgBlue}${colors.white} QUERY ${colors.reset} ${q}\n`),
   response: (r) => console.log(`\n${colors.green}Response:${colors.reset} ${truncate(r, 500)}\n`),
-  
+
   api: (step, msgCount) => console.log(`${colors.dim}[${timestamp()}]${colors.reset} ${colors.magenta}◆${colors.reset} ${step} (${msgCount} messages)`),
   apiDone: (usage) => {
     if (usage) {
@@ -62,7 +61,7 @@ const log = {
     const argStr = truncate(JSON.stringify(args), 100);
     console.log(`${colors.dim}[${timestamp()}]${colors.reset} ${colors.yellow}⚡${colors.reset} ${name} ${colors.dim}${argStr}${colors.reset}`);
   },
-  
+
   toolResult: (name, success, output) => {
     const icon = success ? `${colors.green}✓${colors.reset}` : `${colors.red}✗${colors.reset}`;
     console.log(`${colors.dim}         ${icon} ${truncate(output, 150)}${colors.reset}`);

@@ -24,7 +24,7 @@ const log = {
   error: (title, msg) => console.log(`${colors.dim}[${timestamp()}]${colors.reset} ${colors.red}✗ ${title}${colors.reset} ${msg || ""}`),
   warn: (msg) => console.log(`${colors.dim}[${timestamp()}]${colors.reset} ${colors.yellow}⚠${colors.reset} ${msg}`),
   start: (msg) => console.log(`${colors.dim}[${timestamp()}]${colors.reset} ${colors.cyan}→${colors.reset} ${msg}`),
-  
+
   box: (text) => {
     const lines = text.split("\n");
     const width = Math.max(...lines.map(l => l.length)) + 4;
@@ -37,7 +37,7 @@ const log = {
 
   query: (q) => console.log(`\n${colors.bgBlue}${colors.white} QUERY ${colors.reset} ${q}\n`),
   response: (r) => console.log(`\n${colors.green}Response:${colors.reset} ${r.substring(0, 200)}${r.length > 200 ? "..." : ""}\n`),
-  
+
   api: (step, msgCount) => console.log(`${colors.dim}[${timestamp()}]${colors.reset} ${colors.magenta}◆${colors.reset} ${step} (${msgCount} messages)`),
   apiDone: (usage) => {
     if (usage) {
@@ -47,14 +47,14 @@ const log = {
 
   tool: (name, args) => {
     const argStr = JSON.stringify(args);
-    const truncated = argStr.length > 100 ? argStr.substring(0, 100) + "..." : argStr;
-    console.log(`${colors.dim}[${timestamp()}]${colors.reset} ${colors.yellow}⚡${colors.reset} ${name} ${colors.dim}${truncated}${colors.reset}`);
+    // const truncated = argStr.length > 100 ? argStr.substring(0, 100) + "..." : argStr;
+    console.log(`${colors.dim}[${timestamp()}]${colors.reset} ${colors.yellow}⚡${colors.reset} ${name} ${colors.dim}${argStr}${colors.reset}`);
   },
-  
+
   toolResult: (name, success, output) => {
     const icon = success ? `${colors.green}✓${colors.reset}` : `${colors.red}✗${colors.reset}`;
-    const truncated = output.length > 150 ? output.substring(0, 150) + "..." : output;
-    console.log(`${colors.dim}         ${icon} ${truncated}${colors.reset}`);
+    // const truncated = output.length > 150 ? output.substring(0, 150) + "..." : output;
+    console.log(`${colors.dim}         ${icon} ${output}${colors.reset}`);
   },
 
   vision: (path, question) => {
@@ -63,8 +63,8 @@ const log = {
   },
 
   visionResult: (answer) => {
-    const truncated = answer.length > 200 ? answer.substring(0, 200) + "..." : answer;
-    console.log(`${colors.dim}         A: ${truncated}${colors.reset}`);
+    // const truncated = answer.length > 200 ? answer.substring(0, 200) + "..." : answer;
+    console.log(`${colors.dim}         A: ${answer}${colors.reset}`);
   }
 };
 

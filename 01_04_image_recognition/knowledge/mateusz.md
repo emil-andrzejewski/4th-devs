@@ -1,1 +1,1 @@
-- mateusz wears glasses and a beard and has often long hairs.
+- mateusz wears glasses and a beard and has often long hairs (not always visible in the pictures).
