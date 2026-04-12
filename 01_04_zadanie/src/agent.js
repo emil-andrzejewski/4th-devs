@@ -3,7 +3,13 @@
  * Uses native tools only.
  */
 
-import { chat, extractToolCalls, extractText } from "./api.js";
+import {
+  chat,
+  extractReasoning,
+  extractStepTexts,
+  extractToolCalls,
+  extractText
+} from "./api.js";
 import { nativeTools, executeNativeTool } from "./native/tools.js";
 import log from "./helpers/logger.js";
 
@@ -39,6 +45,29 @@ const runTool = async (toolCall) => {
 
 const runTools = (toolCalls) => Promise.all(toolCalls.map(runTool));
 
+const logStepTrace = (response) => {
+  const reasoning = extractReasoning(response);
+  const stepTexts = extractStepTexts(response);
+
+  if (reasoning.summary.length > 0) {
+    for (const summaryLine of reasoning.summary) {
+      log.info(`[reasoning] ${summaryLine}`);
+    }
+  } else if (reasoning.reasoningCount > 0) {
+    if (reasoning.encryptedCount > 0) {
+      log.info("[reasoning] Provider returned encrypted reasoning without summary.");
+    } else {
+      log.info("[reasoning] Reasoning item received, but summary was empty.");
+    }
+  }
+
+  if (stepTexts.length > 0) {
+    for (const text of stepTexts) {
+      log.info(`[assistant] ${text}`);
+    }
+  }
+};
+
 export const run = async (query, { conversationHistory = [] } = {}) => {
   const messages = [...conversationHistory, { role: "user", content: query }];
 
@@ -51,6 +80,7 @@ export const run = async (query, { conversationHistory = [] } = {}) => {
       tools: nativeTools
     });
     log.apiDone(response.usage);
+    logStepTrace(response);
 
     const toolCalls = extractToolCalls(response);
     messages.push(...(response.output ?? []));
@@ -69,4 +99,3 @@ export const run = async (query, { conversationHistory = [] } = {}) => {
 
   throw new Error(`Max steps (${MAX_STEPS}) reached`);
 };
-

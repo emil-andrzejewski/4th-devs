@@ -4,7 +4,11 @@ import {
   EXTRA_API_HEADERS,
   RESPONSES_API_ENDPOINT
 } from "../../config.js";
-import { extractResponseText } from "./helpers/response.js";
+import {
+  extractAllResponseTexts,
+  extractReasoningInfo,
+  extractResponseText
+} from "./helpers/response.js";
 import { recordUsage } from "./helpers/stats.js";
 
 /**
@@ -51,3 +55,7 @@ export const extractToolCalls = (response) =>
 export const extractText = (response) => {
   return extractResponseText(response) || null;
 };
+
+export const extractStepTexts = (response) => extractAllResponseTexts(response);
+
+export const extractReasoning = (response) => extractReasoningInfo(response);

@@ -55,6 +55,9 @@ MANDATORY CONTEXT-CONTROL WORKFLOW
 6. Resolve and download include files one by one with http_download_to_file.
 7. For image include files, use understand_image.
 
+TRACE LOGGING
+- Before calling tools in each step, emit a short assistant note (1-2 sentences) explaining what you are about to do and why.
+
 DELIVERY
 - Call submit_verify exactly once after composing final declaration.
 - Final response must include everything what is needed for declaration approval
