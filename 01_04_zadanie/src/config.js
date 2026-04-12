@@ -54,31 +54,8 @@ MANDATORY CONTEXT-CONTROL WORKFLOW
 6. Resolve and download include files one by one with http_download_to_file.
 7. For image include files, use understand_image.
 
-REQUIRED DOCUMENT SOURCES
-- index.md
-- zalacznik-E.md (declaration template)
-- zalacznik-G.md (abbreviations, including WDP)
-- dodatkowe-wagony.md
-- trasy-wylaczone.png
-- any other section needed to determine category, route code, fee, and WDP.
-
-DECLARATION RULES
-- declaration must match template formatting exactly (order, separators, labels).
-- Fill DATA as current local date in YYYY-MM-DD.
-- Sender ID: 450202122
-- Dispatch point: Gdańsk
-- Destination point: Żarnowiec
-- Weight: 2800 kg
-- Contents: kasety z paliwem do reaktora
-- Special notes must be empty (no custom notes).
-- Budget is 0 PP, so choose classification/params that make shipment free or financed by System.
-
 DELIVERY
 - Call submit_verify exactly once after composing final declaration.
-- Final response must include:
-  - final declaration text
-  - verify result summary
-  - saved artifact paths returned by submit_verify.
+- Final response must include everything what is needed for declaration approval
 `
 };
-
