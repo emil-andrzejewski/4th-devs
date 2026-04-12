@@ -25,6 +25,7 @@ const PROJECT_ROOT = join(__dirname, "../..");
 const DEFAULT_TIMEOUT_MS = 30_000;
 const DEFAULT_RETRIES = 3;
 const DEFAULT_RETRY_DELAY_MS = 700;
+const DOCS_BASE_URL = new URL(hub.docsBaseUrl);
 
 const sleep = (ms) => new Promise((resolvePromise) => setTimeout(resolvePromise, ms));
 
@@ -234,6 +235,21 @@ const maybeResolveUrl = (baseUrl, target) => {
   }
 };
 
+const isAllowedDocsUrl = (url) => {
+  let parsed;
+
+  try {
+    parsed = new URL(url);
+  } catch {
+    return false;
+  }
+
+  const sameOrigin = parsed.origin === DOCS_BASE_URL.origin;
+  const inDocsPath = parsed.pathname.startsWith(DOCS_BASE_URL.pathname);
+
+  return sameOrigin && inDocsPath;
+};
+
 const pathExists = async (absolutePath) => {
   try {
     await access(absolutePath, fsConstants.F_OK);
@@ -265,7 +281,7 @@ export const nativeTools = [
   {
     type: "function",
     name: "http_download_to_file",
-    description: "Download a file from HTTP(S) to a project-local path and return metadata. Use this before reading docs content.",
+    description: "Download a file from docs scope (https://hub.ag3nts.org/dane/doc/) to a project-local path and return metadata.",
     parameters: {
       type: "object",
       properties: {
@@ -307,7 +323,7 @@ export const nativeTools = [
       required: ["path"],
       additionalProperties: false
     },
-    strict: true
+    strict: false
   },
   {
     type: "function",
@@ -340,7 +356,7 @@ export const nativeTools = [
       required: ["path_or_text"],
       additionalProperties: false
     },
-    strict: true
+    strict: false
   },
   {
     type: "function",
@@ -379,7 +395,21 @@ export const nativeHandlers = {
       throw new Error(`Only HTTP(S) URLs are allowed: ${url}`);
     }
 
+    if (!isAllowedDocsUrl(url)) {
+      throw new Error(`URL outside allowed docs scope: ${url}`);
+    }
+
     const { absolutePath, relativePath } = resolveProjectPath(local_path);
+    const docsCachePath = normalizeSlashes(paths.docsCacheDir);
+    const inDocsCache = (
+      relativePath === docsCachePath
+      || relativePath.startsWith(`${docsCachePath}/`)
+    );
+
+    if (!inDocsCache) {
+      throw new Error(`Downloaded files must be stored in ${paths.docsCacheDir}`);
+    }
+
     await ensureParentDir(absolutePath);
 
     const response = await fetchWithRetry(url, { method: "GET" });

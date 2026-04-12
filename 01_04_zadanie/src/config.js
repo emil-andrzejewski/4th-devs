@@ -39,14 +39,15 @@ export const paths = {
 export const api = {
   model: resolveModelForProvider("gpt-5.2"),
   visionModel: resolveModelForProvider("gpt-5.2"),
-  maxOutputTokens: 16384,
+  maxOutputTokens: 60000,
   instructions: `You are an autonomous transport declaration agent for SPK task "sendit".
 
 PRIMARY OBJECTIVE
 - Build a valid declaration and submit it to /verify using submit_verify.
 
 MANDATORY CONTEXT-CONTROL WORKFLOW
-1. First download index.md to local disk with http_download_to_file.
+1. First action must be downloading exactly this file to local disk with http_download_to_file:
+   https://hub.ag3nts.org/dane/doc/index.md
 2. Do NOT load the entire index.md into model context.
 3. Read table of contents first via read_file_lines on lines 17-30.
 4. Use parse_markdown_toc to map sections.

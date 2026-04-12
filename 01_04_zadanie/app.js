@@ -15,6 +15,7 @@ Goal:
 
 General rules:
 - Work autonomously.
+- Start from this URL: https://hub.ag3nts.org/dane/doc/index.md
 - Minimize context usage by downloading docs to disk and reading only necessary fragments.
 - Discover required sources and constraints from documentation yourself.
 - For image files in docs, use vision tools.
