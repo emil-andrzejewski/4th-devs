@@ -1,15 +1,20 @@
 /**
- * Native tools for image editing agent.
- * 
- * Tools:
- * - create_image: Generate or edit images (reference_images optional)
- * - analyze_image: Evaluate image quality and prompt adherence
+ * Native tools for sendit task.
+ *
+ * Focus:
+ * - HTTP download to local cache
+ * - selective local reads (lines/sections/TOC)
+ * - include extraction
+ * - image understanding (vision)
+ * - verify submission with artifact persistence
  */
 
-import { readFile, writeFile, mkdir } from "fs/promises";
-import { join, extname, dirname } from "path";
-import { fileURLToPath } from "url";
-import { generateImage, editImage, editImageWithReferences } from "./gemini.js";
+import { createHash } from "node:crypto";
+import { readFile, writeFile, mkdir, access } from "node:fs/promises";
+import { constants as fsConstants } from "node:fs";
+import { dirname, extname, join, relative, resolve, sep } from "node:path";
+import { fileURLToPath } from "node:url";
+import { hub, paths, task } from "../config.js";
 import { vision } from "./vision.js";
 import log from "../helpers/logger.js";
 
@@ -17,9 +22,43 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const PROJECT_ROOT = join(__dirname, "../..");
 
-/**
- * MIME type mapping for common image formats.
- */
+const DEFAULT_TIMEOUT_MS = 30_000;
+const DEFAULT_RETRIES = 3;
+const DEFAULT_RETRY_DELAY_MS = 700;
+
+const sleep = (ms) => new Promise((resolvePromise) => setTimeout(resolvePromise, ms));
+
+const normalizeSlashes = (value) => value.replaceAll("\\", "/");
+
+const isPathInsideProject = (absolutePath) => {
+  const normalizedRoot = PROJECT_ROOT.endsWith(sep) ? PROJECT_ROOT : `${PROJECT_ROOT}${sep}`;
+  return absolutePath === PROJECT_ROOT || absolutePath.startsWith(normalizedRoot);
+};
+
+const resolveProjectPath = (userPath) => {
+  if (typeof userPath !== "string" || !userPath.trim()) {
+    throw new Error("Path must be a non-empty string");
+  }
+
+  const absolutePath = resolve(PROJECT_ROOT, userPath);
+  if (!isPathInsideProject(absolutePath)) {
+    throw new Error(`Path escapes project root: ${userPath}`);
+  }
+
+  return {
+    absolutePath,
+    relativePath: normalizeSlashes(relative(PROJECT_ROOT, absolutePath))
+  };
+};
+
+const ensureParentDir = async (absolutePath) => {
+  await mkdir(dirname(absolutePath), { recursive: true });
+};
+
+const toUtf8 = (buffer) => buffer.toString("utf8");
+
+const splitLines = (text) => text.split(/\r?\n/);
+
 const getMimeType = (filepath) => {
   const ext = extname(filepath).toLowerCase();
   const mimeTypes = {
@@ -29,320 +68,528 @@ const getMimeType = (filepath) => {
     ".gif": "image/gif",
     ".webp": "image/webp"
   };
-  return mimeTypes[ext] || "image/png";
+
+  return mimeTypes[ext] || "application/octet-stream";
 };
 
-/**
- * Get file extension from MIME type.
- */
-const getExtension = (mimeType) => {
-  const extensions = {
-    "image/jpeg": ".jpg",
-    "image/png": ".png",
-    "image/gif": ".gif",
-    "image/webp": ".webp"
-  };
-  return extensions[mimeType] || ".png";
-};
+const parseRange = (value) => {
+  const match = /^\s*(\d+)\s*-\s*(\d+)\s*$/.exec(value ?? "");
+  if (!match) return null;
 
-/**
- * Generate a unique filename with timestamp.
- */
-const generateFilename = (prefix, mimeType) => {
-  const timestamp = Date.now();
-  const ext = getExtension(mimeType);
-  return `${prefix}_${timestamp}${ext}`;
-};
+  const start = Number.parseInt(match[1], 10);
+  const end = Number.parseInt(match[2], 10);
 
-/**
- * Ensure directory exists.
- */
-const ensureDir = async (dir) => {
-  try {
-    await mkdir(dir, { recursive: true });
-  } catch (e) {
-    if (e.code !== "EEXIST") throw e;
-  }
-};
-
-const extractTaggedValue = (text, tag) => {
-  const match = text.match(new RegExp(`^${tag}:\\s*(.+)$`, "im"));
-  return match?.[1]?.trim() ?? "";
-};
-
-const extractBulletSection = (text, section) => {
-  const lines = text.split("\n");
-  const header = `${section}:`;
-  const startIndex = lines.findIndex((line) => line.trim().toUpperCase() === header);
-
-  if (startIndex === -1) {
-    return [];
+  if (!Number.isInteger(start) || !Number.isInteger(end) || start < 1 || end < start) {
+    return null;
   }
 
-  const items = [];
+  return { start, end };
+};
 
-  for (let index = startIndex + 1; index < lines.length; index++) {
-    const trimmed = lines[index].trim();
+const normalizeHeading = (value) =>
+  String(value ?? "")
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase()
+    .replace(/[`*_~[\](){}:;,.!?'"\\/-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 
-    if (!trimmed) {
-      continue;
-    }
+const isRetryableStatus = (status) => status === 429 || status >= 500;
 
-    if (/^[A-Z_ ]+:$/.test(trimmed)) {
-      break;
-    }
+const fetchWithRetry = async (url, options = {}) => {
+  const timeoutMs = options.timeoutMs ?? DEFAULT_TIMEOUT_MS;
+  const retries = options.retries ?? DEFAULT_RETRIES;
+  const retryDelayMs = options.retryDelayMs ?? DEFAULT_RETRY_DELAY_MS;
+  let lastError;
 
-    if (trimmed.startsWith("- ")) {
-      items.push(trimmed.slice(2).trim());
+  for (let attempt = 0; attempt < retries; attempt += 1) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+    try {
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+
+      if (!response.ok && isRetryableStatus(response.status) && attempt < retries - 1) {
+        await sleep(retryDelayMs * 2 ** attempt);
+        continue;
+      }
+
+      return response;
+    } catch (error) {
+      clearTimeout(timeoutId);
+      lastError = error;
+
+      if (attempt === retries - 1) {
+        throw error;
+      }
+
+      await sleep(retryDelayMs * 2 ** attempt);
     }
   }
 
-  return items;
+  throw lastError ?? new Error(`Request failed: ${url}`);
 };
 
-const parseAnalysisReport = (analysis) => {
-  const rawVerdict = extractTaggedValue(analysis, "VERDICT").toUpperCase();
-  const scoreText = extractTaggedValue(analysis, "SCORE");
-  const score = Number.parseInt(scoreText, 10);
+const hasLinePrefix = (line) => /^\s*\d+\.\s+\[[^\]]+\]\(#[^)]+\)\s*$/.test(line);
+
+const parseMarkdownHeadings = (lines) => {
+  const headings = [];
+
+  for (let index = 0; index < lines.length; index += 1) {
+    const match = /^(#{1,6})\s+(.+?)\s*$/.exec(lines[index]);
+    if (!match) continue;
+
+    headings.push({
+      line: index + 1,
+      level: match[1].length,
+      text: match[2].trim(),
+      normalized: normalizeHeading(match[2])
+    });
+  }
+
+  return headings;
+};
+
+const readSectionByHeading = (lines, headingName) => {
+  const headings = parseMarkdownHeadings(lines);
+  const target = normalizeHeading(headingName);
+  const startHeading = headings.find((heading) =>
+    heading.normalized === target
+    || heading.normalized.includes(target)
+    || target.includes(heading.normalized)
+  );
+
+  if (!startHeading) {
+    throw new Error(`Heading not found: ${headingName}`);
+  }
+
+  const endHeading = headings.find((heading) =>
+    heading.line > startHeading.line && heading.level <= startHeading.level
+  );
+
+  const startLine = startHeading.line;
+  const endLine = endHeading ? endHeading.line - 1 : lines.length;
+  const content = lines.slice(startLine - 1, endLine).join("\n");
 
   return {
-    verdict: rawVerdict === "RETRY" ? "retry" : "accept",
-    score: Number.isFinite(score) ? score : null,
-    blockingIssues: extractBulletSection(analysis, "BLOCKING_ISSUES"),
-    minorIssues: extractBulletSection(analysis, "MINOR_ISSUES"),
-    nextPromptHints: extractBulletSection(analysis, "NEXT_PROMPT_HINT")
+    startLine,
+    endLine,
+    heading: startHeading.text,
+    content
   };
 };
 
-/**
- * Native tool definitions in OpenAI function format.
- */
+const formatLineWindow = (lines, startLine, endLine) =>
+  lines
+    .slice(startLine - 1, endLine)
+    .map((line, idx) => `${startLine + idx}: ${line}`)
+    .join("\n");
+
+const sha256 = (buffer) => createHash("sha256").update(buffer).digest("hex");
+
+const tryParseJson = (value) => {
+  try {
+    return { ok: true, value: JSON.parse(value) };
+  } catch {
+    return { ok: false, value };
+  }
+};
+
+const parseIncludeTokens = (text) => {
+  const includeRegex = /\[include\s+file="([^"]+)"\]/g;
+  const linksRegex = /\[[^\]]+\]\(([^)]+)\)/g;
+  const includeFiles = [];
+  const linkTargets = [];
+
+  let includeMatch = includeRegex.exec(text);
+  while (includeMatch) {
+    includeFiles.push(includeMatch[1]);
+    includeMatch = includeRegex.exec(text);
+  }
+
+  let linkMatch = linksRegex.exec(text);
+  while (linkMatch) {
+    linkTargets.push(linkMatch[1]);
+    linkMatch = linksRegex.exec(text);
+  }
+
+  return {
+    include_files: [...new Set(includeFiles)],
+    links: [...new Set(linkTargets)]
+  };
+};
+
+const maybeResolveUrl = (baseUrl, target) => {
+  if (!target) return null;
+
+  try {
+    return new URL(target, baseUrl).toString();
+  } catch {
+    return null;
+  }
+};
+
+const pathExists = async (absolutePath) => {
+  try {
+    await access(absolutePath, fsConstants.F_OK);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+const submitVerifyRequest = async (payload) => {
+  const response = await fetchWithRetry(hub.verifyEndpoint, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+
+  const rawText = await response.text();
+  const parsed = tryParseJson(rawText);
+
+  return {
+    ok: response.ok,
+    status: response.status,
+    headers: Object.fromEntries(response.headers.entries()),
+    body: parsed.ok ? parsed.value : rawText
+  };
+};
+
 export const nativeTools = [
   {
     type: "function",
-    name: "create_image",
-    description: "Generate or edit images. For edits, reference_images must use exact workspace-relative filenames such as workspace/input/SCR-20260131-ugqp.jpeg. Never use wildcards or guessed paths.",
+    name: "http_download_to_file",
+    description: "Download a file from HTTP(S) to a project-local path and return metadata. Use this before reading docs content.",
     parameters: {
       type: "object",
       properties: {
-        prompt: {
-          type: "string",
-          description: "Description of image to generate, or instructions for editing reference images. Be specific about style, composition, colors, changes."
-        },
-        output_name: {
-          type: "string",
-          description: "Base name for the output file (without extension). Will be saved to workspace/output/"
-        },
-        reference_images: {
-          type: "array",
-          items: { type: "string" },
-          description: "Optional exact workspace-relative paths to reference image(s) for editing, for example workspace/input/SCR-20260131-ugqp.jpeg. Empty array = generate from scratch."
-        },
-        aspect_ratio: {
-          type: "string",
-          enum: ["1:1", "2:3", "3:2", "3:4", "4:3", "4:5", "5:4", "9:16", "16:9", "21:9"],
-          description: "Optional aspect ratio for the output image. If omitted, follow the style guide or user request."
-        },
-        image_size: {
-          type: "string",
-          enum: ["1k", "2k", "4k"],
-          description: "Optional image size. If omitted, follow the style guide or user request."
-        }
+        url: { type: "string", description: "HTTP(S) URL to download." },
+        local_path: { type: "string", description: "Destination path relative to project root, e.g. workspace/docs-cache/index.md." }
       },
-      required: ["prompt", "output_name", "reference_images"],
+      required: ["url", "local_path"],
       additionalProperties: false
     },
-    strict: false
+    strict: true
   },
   {
     type: "function",
-    name: "analyze_image",
-    description: "Analyze a generated or edited image and return an ACCEPT or RETRY verdict. RETRY should be used only for blocking issues, while minor polish notes should still allow ACCEPT.",
+    name: "read_file_lines",
+    description: "Read only a specific line range from a local text file.",
     parameters: {
       type: "object",
       properties: {
-        image_path: {
-          type: "string",
-          description: "Path to the image file relative to the project root"
-        },
-        original_prompt: {
-          type: "string",
-          description: "The original prompt or instructions used to generate/edit the image"
-        },
-        check_aspects: {
-          type: "array",
-          items: { 
-            type: "string",
-            enum: ["prompt_adherence", "visual_artifacts", "anatomy", "text_rendering", "style_consistency", "composition"]
-          },
-          description: "Specific aspects to check. If not provided, checks all aspects."
-        }
+        path: { type: "string", description: "Path relative to project root." },
+        start: { type: "integer", description: "1-based start line." },
+        end: { type: "integer", description: "1-based end line (inclusive)." }
       },
-      required: ["image_path", "original_prompt"],
+      required: ["path", "start", "end"],
       additionalProperties: false
     },
-    strict: false
+    strict: true
+  },
+  {
+    type: "function",
+    name: "parse_markdown_toc",
+    description: "Parse a markdown table of contents from selected lines and return structured entries.",
+    parameters: {
+      type: "object",
+      properties: {
+        path: { type: "string", description: "Path relative to project root." },
+        start_line: { type: "integer", description: "1-based start line for TOC scan. Default 17." },
+        end_line: { type: "integer", description: "1-based end line for TOC scan. Default 30." }
+      },
+      required: ["path"],
+      additionalProperties: false
+    },
+    strict: true
+  },
+  {
+    type: "function",
+    name: "read_markdown_section",
+    description: "Read one markdown section by heading name or by explicit line range (e.g. '120-180').",
+    parameters: {
+      type: "object",
+      properties: {
+        path: { type: "string", description: "Path relative to project root." },
+        heading_or_range: {
+          type: "string",
+          description: "Heading title (e.g. '9. TABELA OPŁAT I ROZLICZEŃ') or line range ('120-180')."
+        }
+      },
+      required: ["path", "heading_or_range"],
+      additionalProperties: false
+    },
+    strict: true
+  },
+  {
+    type: "function",
+    name: "extract_include_files",
+    description: "Extract [include file=\"...\"] tokens and markdown links from local file text or raw text input.",
+    parameters: {
+      type: "object",
+      properties: {
+        path_or_text: { type: "string", description: "Either a local path or raw text content." },
+        base_url: { type: "string", description: "Optional base URL for resolving relative include targets." }
+      },
+      required: ["path_or_text"],
+      additionalProperties: false
+    },
+    strict: true
+  },
+  {
+    type: "function",
+    name: "understand_image",
+    description: "Analyze a local image file with vision and answer a targeted question.",
+    parameters: {
+      type: "object",
+      properties: {
+        image_path: { type: "string", description: "Path to image relative to project root." },
+        question: { type: "string", description: "Question about the image content." }
+      },
+      required: ["image_path", "question"],
+      additionalProperties: false
+    },
+    strict: true
+  },
+  {
+    type: "function",
+    name: "submit_verify",
+    description: "Submit final declaration to https://hub.ag3nts.org/verify and persist declaration/payload/response files.",
+    parameters: {
+      type: "object",
+      properties: {
+        declaration: { type: "string", description: "Full declaration text exactly matching template format." }
+      },
+      required: ["declaration"],
+      additionalProperties: false
+    },
+    strict: true
   }
 ];
 
-/**
- * Native tool handlers.
- */
 export const nativeHandlers = {
-  /**
-   * Create an image - generate from scratch or edit with references.
-   */
-  async create_image({ prompt, output_name, reference_images, aspect_ratio, image_size }) {
-    const isEditing = reference_images && reference_images.length > 0;
-    const mode = isEditing ? "edit" : "generate";
-
-    try {
-      const options = {};
-      if (aspect_ratio) options.aspectRatio = aspect_ratio;
-      if (image_size) options.imageSize = image_size;
-
-      let result;
-
-      if (isEditing) {
-        // Load reference images
-        const loadedImages = [];
-        for (const imagePath of reference_images) {
-          const fullPath = join(PROJECT_ROOT, imagePath);
-          const imageBuffer = await readFile(fullPath);
-          const imageBase64 = imageBuffer.toString("base64");
-          const mimeType = getMimeType(imagePath);
-          loadedImages.push({ data: imageBase64, mimeType });
-        }
-
-        if (loadedImages.length === 1) {
-          result = await editImage(
-            prompt,
-            loadedImages[0].data,
-            loadedImages[0].mimeType,
-            options
-          );
-        } else {
-          result = await editImageWithReferences(prompt, loadedImages, options);
-        }
-      } else {
-        // Generate from scratch
-        result = await generateImage(prompt, options);
-      }
-      
-      // Save to output folder
-      const outputDir = join(PROJECT_ROOT, "workspace/output");
-      await ensureDir(outputDir);
-      
-      const filename = generateFilename(output_name, result.mimeType);
-      const outputPath = join(outputDir, filename);
-      
-      const imageBuffer = Buffer.from(result.data, "base64");
-      await writeFile(outputPath, imageBuffer);
-      
-      const relativePath = `workspace/output/${filename}`;
-      log.success(`Image saved: ${relativePath}`);
-      
-      return { 
-        success: true,
-        mode,
-        output_path: relativePath,
-        mime_type: result.mimeType,
-        prompt_used: prompt,
-        reference_images: reference_images || []
-      };
-    } catch (error) {
-      log.error("create_image", error.message);
-      return { success: false, error: error.message };
+  async http_download_to_file({ url, local_path }) {
+    if (!/^https?:\/\//i.test(url)) {
+      throw new Error(`Only HTTP(S) URLs are allowed: ${url}`);
     }
+
+    const { absolutePath, relativePath } = resolveProjectPath(local_path);
+    await ensureParentDir(absolutePath);
+
+    const response = await fetchWithRetry(url, { method: "GET" });
+    if (!response.ok) {
+      throw new Error(`Download failed (${response.status}) for ${url}`);
+    }
+
+    const arrayBuffer = await response.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    await writeFile(absolutePath, buffer);
+
+    const contentType = response.headers.get("content-type") ?? "application/octet-stream";
+    log.success(`Downloaded ${url} -> ${relativePath}`);
+
+    return {
+      success: true,
+      url,
+      resolved_url: response.url,
+      local_path: relativePath,
+      status: response.status,
+      content_type: contentType,
+      bytes: buffer.length,
+      sha256: sha256(buffer)
+    };
   },
 
-  /**
-   * Analyze an image for quality issues.
-   */
-  async analyze_image({ image_path, original_prompt, check_aspects }) {
-    try {
-      const fullPath = join(PROJECT_ROOT, image_path);
-      const imageBuffer = await readFile(fullPath);
-      const imageBase64 = imageBuffer.toString("base64");
-      const mimeType = getMimeType(image_path);
+  async read_file_lines({ path, start, end }) {
+    if (!Number.isInteger(start) || !Number.isInteger(end) || start < 1 || end < start) {
+      throw new Error(`Invalid line range: ${start}-${end}`);
+    }
 
-      // Build analysis question based on aspects to check
-      const aspects = check_aspects || [
-        "prompt_adherence",
-        "visual_artifacts", 
-        "anatomy",
-        "text_rendering",
-        "style_consistency",
-        "composition"
-      ];
+    const { absolutePath, relativePath } = resolveProjectPath(path);
+    const content = await readFile(absolutePath, "utf8");
+    const lines = splitLines(content);
+    const safeEnd = Math.min(end, lines.length);
 
-      const analysisPrompt = `Analyze this AI-generated image for quality issues. The original prompt was:
-"${original_prompt}"
+    return {
+      success: true,
+      path: relativePath,
+      start,
+      end: safeEnd,
+      total_lines: lines.length,
+      line_count: safeEnd >= start ? safeEnd - start + 1 : 0,
+      content: safeEnd >= start ? formatLineWindow(lines, start, safeEnd) : ""
+    };
+  },
 
-Please evaluate the following aspects:
+  async parse_markdown_toc({ path, start_line = 17, end_line = 30 }) {
+    if (!Number.isInteger(start_line) || !Number.isInteger(end_line) || start_line < 1 || end_line < start_line) {
+      throw new Error(`Invalid TOC range: ${start_line}-${end_line}`);
+    }
 
-${aspects.includes("prompt_adherence") ? `1. PROMPT ADHERENCE: Does the image accurately represent what was requested? What elements match or are missing?` : ""}
-${aspects.includes("visual_artifacts") ? `2. VISUAL ARTIFACTS: Are there any glitches, distortions, blur, noise, or unnatural patterns?` : ""}
-${aspects.includes("anatomy") ? `3. ANATOMY: If there are people/animals, check for correct proportions, especially hands, fingers, faces, and limbs.` : ""}
-${aspects.includes("text_rendering") ? `4. TEXT RENDERING: If text was requested, is it readable and correctly spelled?` : ""}
-${aspects.includes("style_consistency") ? `5. STYLE CONSISTENCY: Is the visual style coherent throughout the image?` : ""}
-${aspects.includes("composition") ? `6. COMPOSITION: Is the framing and layout balanced and appropriate?` : ""}
+    const { absolutePath, relativePath } = resolveProjectPath(path);
+    const content = await readFile(absolutePath, "utf8");
+    const lines = splitLines(content);
+    const safeEnd = Math.min(end_line, lines.length);
+    const entries = [];
 
-Use this exact output format:
+    for (let lineNo = start_line; lineNo <= safeEnd; lineNo += 1) {
+      const line = lines[lineNo - 1] ?? "";
+      if (!hasLinePrefix(line)) continue;
 
-VERDICT: ACCEPT or RETRY
-SCORE: <1-10>
-BLOCKING_ISSUES:
-- <only issues that materially break the brief; use "none" if there are none>
-MINOR_ISSUES:
-- <optional polish notes that do not require another retry; use "none" if there are none>
-NEXT_PROMPT_HINT:
-- <targeted retry hint only if VERDICT is RETRY; otherwise use "none">
+      const match = /^\s*(\d+)\.\s+\[([^\]]+)\]\((#[^)]+)\)\s*$/.exec(line);
+      if (!match) continue;
 
-Decision rules:
-- Use ACCEPT when the main subject, layout intent, and style-guide essentials are satisfied, even if minor polish notes remain.
-- Use RETRY only when there are blocking issues such as wrong subject, broken composition, unreadable required text, severe artifacts, or clear style-guide violations.
-- Do NOT use RETRY for small polish improvements alone.`;
-
-      log.vision(image_path, "Quality analysis");
-
-      const analysis = await vision({
-        imageBase64,
-        mimeType,
-        question: analysisPrompt
+      entries.push({
+        index: Number.parseInt(match[1], 10),
+        title: match[2],
+        anchor: match[3].slice(1),
+        line: lineNo
       });
+    }
 
-      log.visionResult(analysis.substring(0, 150) + "...");
+    return {
+      success: true,
+      path: relativePath,
+      start_line,
+      end_line: safeEnd,
+      entries,
+      scanned_lines: formatLineWindow(lines, start_line, safeEnd)
+    };
+  },
 
-      const report = parseAnalysisReport(analysis);
+  async read_markdown_section({ path, heading_or_range }) {
+    const { absolutePath, relativePath } = resolveProjectPath(path);
+    const content = await readFile(absolutePath, "utf8");
+    const lines = splitLines(content);
+    const range = parseRange(heading_or_range);
 
+    if (range) {
+      const safeEnd = Math.min(range.end, lines.length);
       return {
         success: true,
-        image_path,
-        original_prompt,
-        aspects_checked: aspects,
-        verdict: report.verdict,
-        score: report.score,
-        blocking_issues: report.blockingIssues,
-        minor_issues: report.minorIssues,
-        next_prompt_hints: report.nextPromptHints,
-        analysis
+        path: relativePath,
+        mode: "range",
+        start_line: range.start,
+        end_line: safeEnd,
+        content: lines.slice(range.start - 1, safeEnd).join("\n")
       };
-    } catch (error) {
-      log.error("analyze_image", error.message);
-      return { success: false, error: error.message };
     }
+
+    const section = readSectionByHeading(lines, heading_or_range);
+    return {
+      success: true,
+      path: relativePath,
+      mode: "heading",
+      heading: section.heading,
+      start_line: section.startLine,
+      end_line: section.endLine,
+      content: section.content
+    };
+  },
+
+  async extract_include_files({ path_or_text, base_url }) {
+    let text = path_or_text;
+    let source = "text";
+
+    const canBePath = (
+      typeof path_or_text === "string"
+      && path_or_text.length <= 300
+      && !path_or_text.includes("\n")
+      && !path_or_text.includes("\r")
+    );
+
+    if (canBePath) {
+      try {
+        const maybePath = resolveProjectPath(path_or_text);
+        if (await pathExists(maybePath.absolutePath)) {
+          text = await readFile(maybePath.absolutePath, "utf8");
+          source = maybePath.relativePath;
+        }
+      } catch {
+        // If input is raw text, treat it as text source without failing.
+      }
+    }
+
+    const parsed = parseIncludeTokens(text);
+    const resolvedIncludes = parsed.include_files
+      .map((file) => ({ file, resolved_url: maybeResolveUrl(base_url, file) }))
+      .filter((item) => item.resolved_url);
+    const resolvedLinks = parsed.links
+      .map((href) => ({ href, resolved_url: maybeResolveUrl(base_url, href) }))
+      .filter((item) => item.resolved_url);
+
+    return {
+      success: true,
+      source,
+      include_files: parsed.include_files,
+      links: parsed.links,
+      resolved_includes: resolvedIncludes,
+      resolved_links: resolvedLinks
+    };
+  },
+
+  async understand_image({ image_path, question }) {
+    const { absolutePath, relativePath } = resolveProjectPath(image_path);
+    const buffer = await readFile(absolutePath);
+    const mimeType = getMimeType(absolutePath);
+    const imageBase64 = buffer.toString("base64");
+
+    log.vision(relativePath, question);
+    const answer = await vision({ imageBase64, mimeType, question });
+    log.info(`Vision response ready for ${relativePath}`);
+
+    return {
+      success: true,
+      image_path: relativePath,
+      mime_type: mimeType,
+      answer
+    };
+  },
+
+  async submit_verify({ declaration }) {
+    if (typeof declaration !== "string" || !declaration.trim()) {
+      throw new Error("declaration must be a non-empty string");
+    }
+
+    const payload = {
+      apikey: task.apiKey,
+      task: task.name,
+      answer: {
+        declaration
+      }
+    };
+
+    const verifyResult = await submitVerifyRequest(payload);
+    const declarationPath = resolveProjectPath(paths.declaration);
+    const payloadPath = resolveProjectPath(paths.verifyPayload);
+    const responsePath = resolveProjectPath(paths.verifyResponse);
+
+    await ensureParentDir(declarationPath.absolutePath);
+    await writeFile(declarationPath.absolutePath, declaration, "utf8");
+    await writeFile(payloadPath.absolutePath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
+    await writeFile(responsePath.absolutePath, `${JSON.stringify(verifyResult, null, 2)}\n`, "utf8");
+
+    return {
+      success: verifyResult.ok,
+      status: verifyResult.status,
+      response: verifyResult.body,
+      savedPaths: {
+        declaration: declarationPath.relativePath,
+        payload: payloadPath.relativePath,
+        response: responsePath.relativePath
+      }
+    };
   }
 };
 
-/**
- * Check if a tool is native (not MCP).
- */
 export const isNativeTool = (name) => name in nativeHandlers;
 
-/**
- * Execute a native tool.
- */
 export const executeNativeTool = async (name, args) => {
   const handler = nativeHandlers[name];
   if (!handler) throw new Error(`Unknown native tool: ${name}`);

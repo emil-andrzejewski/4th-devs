@@ -1,66 +1,72 @@
 /**
- * Agent loop — chat → tool calls → results cycle until completion.
- * Supports both MCP and native tools with conversation state.
+ * One-shot agent loop: chat -> tool calls -> tool outputs until completion.
+ * Uses native tools only.
  */
 
 import { chat, extractToolCalls, extractText } from "./api.js";
-import { callMcpTool, mcpToolsToOpenAI } from "./mcp/client.js";
-import { nativeTools, isNativeTool, executeNativeTool } from "./native/tools.js";
+import { nativeTools, executeNativeTool } from "./native/tools.js";
 import log from "./helpers/logger.js";
 
-const MAX_STEPS = 50;
+const MAX_STEPS = 60;
 
-const runTool = async (mcpClient, toolCall) => {
-  const args = JSON.parse(toolCall.arguments);
-  log.tool(toolCall.name, args);
-
+const parseToolArguments = (toolCall) => {
   try {
-    const result = isNativeTool(toolCall.name)
-      ? await executeNativeTool(toolCall.name, args)
-      : await callMcpTool(mcpClient, toolCall.name, args);
-
-    const output = JSON.stringify(result);
-    log.toolResult(toolCall.name, true, output);
-    return { type: "function_call_output", call_id: toolCall.call_id, output };
-  } catch (error) {
-    const output = JSON.stringify({ error: error.message });
-    log.toolResult(toolCall.name, false, error.message);
-    return { type: "function_call_output", call_id: toolCall.call_id, output };
+    return JSON.parse(toolCall.arguments ?? "{}");
+  } catch {
+    throw new Error(`Invalid JSON arguments for tool ${toolCall.name}`);
   }
 };
 
-const runTools = (mcpClient, toolCalls) =>
-  Promise.all(toolCalls.map(tc => runTool(mcpClient, tc)));
+const runTool = async (toolCall) => {
+  const args = parseToolArguments(toolCall);
+  log.info(`Tool call: ${toolCall.name}`);
 
-export const run = async (query, { mcpClient, mcpTools, conversationHistory = [] }) => {
-  const tools = [...mcpToolsToOpenAI(mcpTools), ...nativeTools];
+  try {
+    const result = await executeNativeTool(toolCall.name, args);
+    return {
+      type: "function_call_output",
+      call_id: toolCall.call_id,
+      output: JSON.stringify(result)
+    };
+  } catch (error) {
+    return {
+      type: "function_call_output",
+      call_id: toolCall.call_id,
+      output: JSON.stringify({ error: error.message })
+    };
+  }
+};
+
+const runTools = (toolCalls) => Promise.all(toolCalls.map(runTool));
+
+export const run = async (query, { conversationHistory = [] } = {}) => {
   const messages = [...conversationHistory, { role: "user", content: query }];
-  const toolCallHistory = [];
 
   log.query(query);
 
-  for (let step = 1; step <= MAX_STEPS; step++) {
+  for (let step = 1; step <= MAX_STEPS; step += 1) {
     log.api(`Step ${step}`, messages.length);
-    const response = await chat({ input: messages, tools });
+    const response = await chat({
+      input: messages,
+      tools: nativeTools
+    });
     log.apiDone(response.usage);
 
     const toolCalls = extractToolCalls(response);
+    messages.push(...(response.output ?? []));
 
     if (toolCalls.length === 0) {
       const text = extractText(response) ?? "No response";
-      messages.push(...response.output);
-      return { response: text, toolCalls: toolCallHistory, conversationHistory: messages };
+      return {
+        response: text,
+        conversationHistory: messages
+      };
     }
 
-    messages.push(...response.output);
-
-    for (const tc of toolCalls) {
-      toolCallHistory.push({ name: tc.name, arguments: JSON.parse(tc.arguments) });
-    }
-
-    const results = await runTools(mcpClient, toolCalls);
-    messages.push(...results);
+    const toolOutputs = await runTools(toolCalls);
+    messages.push(...toolOutputs);
   }
 
   throw new Error(`Max steps (${MAX_STEPS}) reached`);
 };
+

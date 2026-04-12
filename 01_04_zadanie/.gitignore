@@ -1,5 +1,9 @@
 node_modules/
 .env
+workspace/docs-cache/
+workspace/logs/*.txt
+workspace/output/*.txt
+workspace/output/*.json
 workspace/output/*.png
 workspace/output/*.jpg
 workspace/output/*.jpeg

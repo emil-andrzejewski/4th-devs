@@ -1,66 +1,84 @@
-import { OPENROUTER_API_KEY, resolveModelForProvider } from "../../config.js";
+import { resolveModelForProvider } from "../../config.js";
 
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY?.trim() ?? "";
-const hasGeminiImageBackend = Boolean(GEMINI_API_KEY);
-const hasOpenRouterImageBackend = Boolean(OPENROUTER_API_KEY);
+const AG3NTS_API_KEY = process.env.AG3NTS_API_KEY?.trim() ?? "";
 
-if (!hasGeminiImageBackend && !hasOpenRouterImageBackend) {
-  console.error("\x1b[31mError: image generation backend is not configured\x1b[0m");
-  console.error("       Add one of these to the repo root .env file:");
-  console.error("       OPENROUTER_API_KEY=sk-or-v1-...   # uses google/gemini-3.1-flash-image-preview");
-  console.error("       GEMINI_API_KEY=...                # uses native Gemini image generation");
+if (!AG3NTS_API_KEY) {
+  console.error("\x1b[31mError: AG3NTS_API_KEY is not configured\x1b[0m");
+  console.error("       Add AG3NTS_API_KEY to the repo root .env file.");
   process.exit(1);
 }
 
-export { GEMINI_API_KEY };
-export const IMAGE_BACKEND = hasOpenRouterImageBackend ? "openrouter" : "gemini";
+export const hub = {
+  docsBaseUrl: "https://hub.ag3nts.org/dane/doc/",
+  verifyEndpoint: "https://hub.ag3nts.org/verify"
+};
+
+export const task = {
+  apiKey: AG3NTS_API_KEY,
+  name: "sendit",
+  payload: {
+    senderId: "450202122",
+    dispatchPoint: "Gdańsk",
+    destinationPoint: "Żarnowiec",
+    weightKg: 2800,
+    budgetPP: 0,
+    contents: "kasety z paliwem do reaktora",
+    specialNotes: ""
+  }
+};
+
+export const paths = {
+  docsCacheDir: "workspace/docs-cache",
+  outputDir: "workspace/output",
+  logsDir: "workspace/logs",
+  declaration: "workspace/output/declaration.txt",
+  verifyPayload: "workspace/output/verify-payload.json",
+  verifyResponse: "workspace/output/verify-response.json"
+};
 
 export const api = {
   model: resolveModelForProvider("gpt-5.2"),
   visionModel: resolveModelForProvider("gpt-5.2"),
   maxOutputTokens: 16384,
-  instructions: `You are an image editing assistant.
+  instructions: `You are an autonomous transport declaration agent for SPK task "sendit".
 
-<style_guide>
-Read workspace/style-guide.md before your first image action.
-Use it to shape the prompt, composition, and finish quality.
-</style_guide>
+PRIMARY OBJECTIVE
+- Build a valid declaration and submit it to /verify using submit_verify.
 
-<workflow>
-1. If the task is about editing or restyling an existing source image, first determine the exact filename in workspace/input.
-2. If the filename is missing, ambiguous, or there are multiple matches, ask a short clarification question before generating.
-3. For edit requests, use the exact workspace-relative path: workspace/input/<exact_filename>.
-4. Generate or edit the image.
-5. Run analyze_image on the result.
-6. If the analyze_image verdict is retry, make a focused retry based on the blocking issues and prompt hint.
-7. Stop when the verdict is accept, or after two targeted retries.
-</workflow>
+MANDATORY CONTEXT-CONTROL WORKFLOW
+1. First download index.md to local disk with http_download_to_file.
+2. Do NOT load the entire index.md into model context.
+3. Read table of contents first via read_file_lines on lines 17-30.
+4. Use parse_markdown_toc to map sections.
+5. Read only needed sections with read_markdown_section or read_file_lines.
+6. Resolve and download include files one by one with http_download_to_file.
+7. For image include files, use understand_image.
 
-<quality_bar>
-Aim for a result that satisfies the user's request and the main style-guide constraints.
-Acceptable output is allowed when only small polish notes remain.
-Retry only for blocking problems such as the wrong subject, broken layout, strong artifacts, unreadable required text, or clear style-guide violations.
-</quality_bar>
+REQUIRED DOCUMENT SOURCES
+- index.md
+- zalacznik-E.md (declaration template)
+- zalacznik-G.md (abbreviations, including WDP)
+- dodatkowe-wagony.md
+- trasy-wylaczone.png
+- any other section needed to determine category, route code, fee, and WDP.
 
-<filename_rule>
-Never guess, shorten, or wildcard filenames for edit requests.
-Use the exact filename, for example workspace/input/SCR-20260131-ugqp.jpeg.
-</filename_rule>
+DECLARATION RULES
+- declaration must match template formatting exactly (order, separators, labels).
+- Fill DATA as current local date in YYYY-MM-DD.
+- Sender ID: 450202122
+- Dispatch point: Gdańsk
+- Destination point: Żarnowiec
+- Weight: 2800 kg
+- Contents: kasety z paliwem do reaktora
+- Special notes must be empty (no custom notes).
+- Budget is 0 PP, so choose classification/params that make shipment free or financed by System.
 
-<communication>
-Keep the tone calm and practical.
-Ask for human input only when the request is ambiguous, the filename cannot be identified confidently, a new creative direction is needed, or repeated retries do not improve the same blocking issue.
-</communication>`
+DELIVERY
+- Call submit_verify exactly once after composing final declaration.
+- Final response must include:
+  - final declaration text
+  - verify result summary
+  - saved artifact paths returned by submit_verify.
+`
 };
 
-export const gemini = {
-  apiKey: GEMINI_API_KEY,
-  imageBackend: IMAGE_BACKEND,
-  imageModel: IMAGE_BACKEND === "openrouter"
-    ? "google/gemini-3.1-flash-image-preview"
-    : "gemini-3.1-flash-image-preview",
-  endpoint: "https://generativelanguage.googleapis.com/v1beta/interactions",
-  openRouterEndpoint: "https://openrouter.ai/api/v1/chat/completions"
-};
-
-export const outputFolder = "workspace/output";

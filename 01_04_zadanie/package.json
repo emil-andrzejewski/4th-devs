@@ -1,5 +1,5 @@
 {
-  "name": "01_04_image_editing",
+  "name": "01_04_zadanie",
   "type": "module",
   "scripts": {
     "start": "node app.js",

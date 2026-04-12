@@ -1,27 +1,33 @@
-# 01_04_image_editing
+# 01_04_zadanie (sendit)
 
-Interactive image generation and editing with quality checks.
+One-shot agent pipeline that:
+- downloads SPK docs to local cache,
+- reads only selected fragments (TOC + needed sections),
+- builds declaration in strict template format,
+- auto-sends payload to `https://hub.ag3nts.org/verify`,
+- saves declaration/payload/response artifacts.
 
 ## Run
 
 ```bash
-npm run lesson4:image_editing
+cd C:\Users\Emil\repos\aidevs\4th-devs\01_04_zadanie
+npm start
 ```
 
-## Required setup
+## Required env (repo root `.env`)
 
-1. Copy `env.example` to `.env` in the repo root.
-2. Set one Responses API key: `OPENAI_API_KEY` or `OPENROUTER_API_KEY`.
-3. For image generation and editing, set `OPENROUTER_API_KEY` or `GEMINI_API_KEY`.
-4. Add optional source images to `workspace/input/`.
+- `AG3NTS_API_KEY`
+- `OPENAI_API_KEY` or `OPENROUTER_API_KEY`
 
-## What it does
+## Output files
 
-1. Reads `workspace/style-guide.md` before generation
-2. Generates new images or edits reference images
-3. Analyzes the result for prompt adherence and quality issues
-4. Saves final files to `workspace/output/`
+- `workspace/output/declaration.txt`
+- `workspace/output/verify-payload.json`
+- `workspace/output/verify-response.json`
+- run logs: `workspace/logs/run-*.txt`
 
 ## Notes
 
-If both keys are present, image generation prefers OpenRouter with `google/gemini-3.1-flash-image-preview`. Use `clear` to reset the conversation and `exit` to quit the REPL.
+- Pipeline is non-interactive (no REPL).
+- It uses `download-to-disk + selective read` flow to avoid loading full `index.md` into model context.
+

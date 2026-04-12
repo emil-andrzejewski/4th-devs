@@ -1,95 +1,81 @@
 /**
- * Image Editing Agent (Interactive)
+ * sendit one-shot pipeline runner.
  */
 
-import { createInterface } from "node:readline/promises";
-import { createMcpClient, listMcpTools } from "./src/mcp/client.js";
-import { nativeTools } from "./src/native/tools.js";
-import { createReadline, runRepl } from "./src/repl.js";
-import { onShutdown } from "./src/helpers/shutdown.js";
-import { logStats } from "./src/helpers/stats.js";
+import { run } from "./src/agent.js";
+import { hub, paths, task } from "./src/config.js";
+import { enableFileLogging } from "./src/helpers/file-log.js";
+import { logStats, resetStats } from "./src/helpers/stats.js";
 import log from "./src/helpers/logger.js";
 
-const EXAMPLES = [
-  "Restyle workspace/input/SCR-20260131-ugqp.jpeg to match workspace/style-guide.md",
-  "Create a monochrome concept sketch of a futuristic motorcycle",
-  "Edit workspace/input/SCR-20260131-ugqp.jpeg into a black-and-white pencil sketch",
-  "Review the latest generated image for blocking issues and style consistency"
-];
+const TASK_QUERY = `Execute task "sendit" end-to-end with tools.
 
-const DEMO_FILES = [
-  "workspace/demo/SCR_DEMO_input.jpeg",
-  "workspace/demo/SCR_DEMO_output.jpg"
-];
+Hard workflow:
+1) Call http_download_to_file for ${hub.docsBaseUrl}index.md -> ${paths.docsCacheDir}/index.md.
+2) Read TOC first only:
+   - read_file_lines on ${paths.docsCacheDir}/index.md lines 17-30
+   - parse_markdown_toc on ${paths.docsCacheDir}/index.md
+3) Do selective reading only (no full index dump):
+   - read_markdown_section for needed sections
+   - extract_include_files for include directives
+4) Download required include files one by one to ${paths.docsCacheDir}/...
+5) Analyze ${paths.docsCacheDir}/trasy-wylaczone.png with understand_image to confirm route code for Gdańsk -> Żarnowiec.
+6) Determine category, WDP, and payment so budget 0 PP is valid.
+7) Build declaration exactly in template format from zalacznik-E.md.
+8) Submit via submit_verify with declaration.
+9) In final response include:
+   - final declaration text
+   - verify status/result
+   - saved artifact paths.
 
-const confirmRun = async () => {
-  const rl = createInterface({ input: process.stdin, output: process.stdout });
-
-  console.log("\n⚠️  UWAGA: Uruchomienie tego agenta może zużyć zauważalną liczbę tokenów i wygenerować obrazy.");
-  console.log("   Jeśli nie chcesz uruchamiać go teraz, najpierw sprawdź pliki demo:");
-  console.log(`   Demo input : ${DEMO_FILES[0]}`);
-  console.log(`   Demo output: ${DEMO_FILES[1]}`);
-  console.log("");
-
-  const answer = await rl.question("Czy chcesz kontynuować? (yes/y): ");
-  rl.close();
-
-  const normalized = answer.trim().toLowerCase();
-  if (normalized !== "yes" && normalized !== "y") {
-    console.log("Przerwano.");
-    process.exit(0);
-  }
-};
-
-const printTools = () => {
-  log.heading("TOOLS");
-
-  for (const tool of nativeTools) {
-    log.info(`${tool.name.padEnd(14)} — ${tool.description.split(".")[0]}`);
-  }
-};
-
-const printExamples = () => {
-  log.heading("EXAMPLES", "For demo purposes, try these queries:");
-  EXAMPLES.forEach((example) => log.example(example));
-  log.hint("Type 'exit' to quit, 'clear' to reset conversation");
-};
+Known shipment data:
+- Nadawca: ${task.payload.senderId}
+- Punkt nadawczy: ${task.payload.dispatchPoint}
+- Punkt docelowy: ${task.payload.destinationPoint}
+- Waga: ${task.payload.weightKg} kg
+- Budżet: ${task.payload.budgetPP} PP
+- Zawartość: ${task.payload.contents}
+- Uwagi specjalne: brak`;
 
 const main = async () => {
-  log.box("Image Editing Agent");
-  await confirmRun();
-  printTools();
+  const fileLog = await enableFileLogging(paths.logsDir);
+  let cleaned = false;
 
-  let mcpClient;
-  let rl;
+  const cleanup = async () => {
+    if (cleaned) return;
+    cleaned = true;
+    logStats();
+    await fileLog.close();
+  };
+
+  const shutdownHandler = async (code) => {
+    try {
+      await cleanup();
+    } finally {
+      process.exit(code);
+    }
+  };
+
+  process.on("SIGINT", () => void shutdownHandler(130));
+  process.on("SIGTERM", () => void shutdownHandler(143));
+
+  log.box("SPK Sendit Agent (One-shot)");
+  log.info(`File log: ${fileLog.relativePath}`);
+  resetStats();
 
   try {
-    log.start("Connecting to MCP server...");
-    mcpClient = await createMcpClient();
-    const mcpTools = await listMcpTools(mcpClient);
-    log.success(`MCP: ${mcpTools.map((tool) => tool.name).join(", ")}`);
-
-    printExamples();
-
-    rl = createReadline();
-    const shutdown = onShutdown(async () => {
-      logStats();
-      rl?.close();
-      if (mcpClient) await mcpClient.close();
-    });
-
-    await runRepl({ mcpClient, mcpTools, rl });
-    await shutdown();
+    const result = await run(TASK_QUERY);
+    console.log(`\nAssistant:\n${result.response}\n`);
+    await cleanup();
   } catch (error) {
-    rl?.close();
-    if (mcpClient) {
-      await mcpClient.close().catch(() => {});
-    }
-    throw error;
+    log.error("Pipeline error", error.message);
+    await cleanup();
+    process.exit(1);
   }
 };
 
-main().catch((err) => {
-  log.error("Startup error", err.message);
+main().catch((error) => {
+  console.error(error);
   process.exit(1);
 });
+
