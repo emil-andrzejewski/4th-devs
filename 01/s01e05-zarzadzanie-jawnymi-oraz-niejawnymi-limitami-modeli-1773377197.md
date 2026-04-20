@@ -69,6 +69,8 @@ Mechanizm "zaufanych" akcji jest kluczowy dla komfortu użytkownika, ponieważ r
 
 Na powyższych przykładach widzimy wyraźnie, że utrzymanie kontroli jest możliwe, ale jedynie do pewnego stopnia. Wszędzie tam, gdzie agent ma dostęp do danych i akcji, musimy brać pod uwagę, że coś może pójść nie tak i informacje z jednego źródła zostaną przekazane do drugiego. Dlatego problem ten musi być adresowany na poziomie założeń projektowych i jeśli przypadkowe przesłanie danych w niepożądane miejsce jest niedopuszczalne, a akceptacja ze strony użytkownika nie będzie wystarczająca, tam wdrożenie LLM jest **nierekomendowane**.
 
+// tu jestem
+
 **Wydajność**
 
 Na temat wydajności rozmawialiśmy już w S01E02 w kontekście optymalizacji narzędzi. Wszystkie omówione tam techniki mają zastosowanie do całościowej interakcji z modelami. Na produkcji musimy uwzględnić jeszcze kilka dodatkowych obszarów związanych z wydajnością, które jednocześnie są powiązane z architekturą aplikacji:
