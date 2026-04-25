@@ -7,7 +7,7 @@ Multi-provider AI agent server with tool execution, MCP integration, and markdow
 ```bash
 npm install
 cp .env.example .env   # fill in API keys
-npm run db:push         # create SQLite tables
+npm run db:push         # create SQLite tables (auto-creates .data/)
 npm run db:seed         # seed default user
 npm run dev             # start dev server (http://127.0.0.1:3000)
 ```
@@ -293,6 +293,8 @@ Models use `provider:model` format:
 ## Database
 
 SQLite via Drizzle ORM. Tables: `users`, `sessions`, `agents`, `items`.
+
+`npm run db:push` automatically creates the local `.data/` directory used by the default SQLite URL (`file:.data/agent.db`).
 
 ```bash
 npm run db:push      # apply schema to database

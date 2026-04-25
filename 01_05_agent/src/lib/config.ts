@@ -119,7 +119,7 @@ export const config = {
       : {}),
   },
 
-  defaultModel: parsed.DEFAULT_MODEL ?? `${defaultProvider}:gpt-5.4`,
+  defaultModel: parsed.DEFAULT_MODEL ?? `${defaultProvider}:gpt-5.2`,
 
   agentMaxTurns: parsed.AGENT_MAX_TURNS,
 
