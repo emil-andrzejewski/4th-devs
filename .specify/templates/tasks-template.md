@@ -49,8 +49,10 @@ description: "Task list template for feature implementation"
 **Purpose**: Project initialization and basic structure
 
 - [ ] T001 Create project structure per implementation plan
-- [ ] T002 Initialize [language] project with [framework] dependencies
-- [ ] T003 [P] Configure linting and formatting tools
+- [ ] T002 Validate repository naming and placement against constitution rules
+- [ ] T003 Initialize [language] project with [framework] dependencies
+- [ ] T004 [P] Configure linting and formatting tools
+- [ ] T005 Add/verify run instructions, env requirements, and expected outputs in docs
 
 ---
 
@@ -62,12 +64,15 @@ description: "Task list template for feature implementation"
 
 Examples of foundational tasks (adjust based on your project):
 
-- [ ] T004 Setup database schema and migrations framework
-- [ ] T005 [P] Implement authentication/authorization framework
-- [ ] T006 [P] Setup API routing and middleware structure
-- [ ] T007 Create base models/entities that all stories depend on
-- [ ] T008 Configure error handling and logging infrastructure
-- [ ] T009 Setup environment configuration management
+- [ ] T006 Verify category boundaries (example/template/solved-task) for all changed paths
+- [ ] T007 [P] If `mcp/` changed, validate at least one consumer workflow still works
+- [ ] T008 [P] Document MCP compatibility impact and migration notes (when applicable)
+- [ ] T009 Setup database schema and migrations framework
+- [ ] T010 [P] Implement authentication/authorization framework
+- [ ] T011 [P] Setup API routing and middleware structure
+- [ ] T012 Create base models/entities that all stories depend on
+- [ ] T013 Configure error handling and logging infrastructure
+- [ ] T014 Setup environment configuration management
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -83,17 +88,17 @@ Examples of foundational tasks (adjust based on your project):
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T010 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].py
-- [ ] T011 [P] [US1] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T015 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].py
+- [ ] T016 [P] [US1] Integration test for [user journey] in tests/integration/test_[name].py
 
 ### Implementation for User Story 1
 
-- [ ] T012 [P] [US1] Create [Entity1] model in src/models/[entity1].py
-- [ ] T013 [P] [US1] Create [Entity2] model in src/models/[entity2].py
-- [ ] T014 [US1] Implement [Service] in src/services/[service].py (depends on T012, T013)
-- [ ] T015 [US1] Implement [endpoint/feature] in src/[location]/[file].py
-- [ ] T016 [US1] Add validation and error handling
-- [ ] T017 [US1] Add logging for user story 1 operations
+- [ ] T017 [P] [US1] Create [Entity1] model in src/models/[entity1].py
+- [ ] T018 [P] [US1] Create [Entity2] model in src/models/[entity2].py
+- [ ] T019 [US1] Implement [Service] in src/services/[service].py (depends on T017, T018)
+- [ ] T020 [US1] Implement [endpoint/feature] in src/[location]/[file].py
+- [ ] T021 [US1] Add validation and error handling
+- [ ] T022 [US1] Add logging for user story 1 operations
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -107,15 +112,15 @@ Examples of foundational tasks (adjust based on your project):
 
 ### Tests for User Story 2 (OPTIONAL - only if tests requested) ⚠️
 
-- [ ] T018 [P] [US2] Contract test for [endpoint] in tests/contract/test_[name].py
-- [ ] T019 [P] [US2] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T023 [P] [US2] Contract test for [endpoint] in tests/contract/test_[name].py
+- [ ] T024 [P] [US2] Integration test for [user journey] in tests/integration/test_[name].py
 
 ### Implementation for User Story 2
 
-- [ ] T020 [P] [US2] Create [Entity] model in src/models/[entity].py
-- [ ] T021 [US2] Implement [Service] in src/services/[service].py
-- [ ] T022 [US2] Implement [endpoint/feature] in src/[location]/[file].py
-- [ ] T023 [US2] Integrate with User Story 1 components (if needed)
+- [ ] T025 [P] [US2] Create [Entity] model in src/models/[entity].py
+- [ ] T026 [US2] Implement [Service] in src/services/[service].py
+- [ ] T027 [US2] Implement [endpoint/feature] in src/[location]/[file].py
+- [ ] T028 [US2] Integrate with User Story 1 components (if needed)
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -129,14 +134,14 @@ Examples of foundational tasks (adjust based on your project):
 
 ### Tests for User Story 3 (OPTIONAL - only if tests requested) ⚠️
 
-- [ ] T024 [P] [US3] Contract test for [endpoint] in tests/contract/test_[name].py
-- [ ] T025 [P] [US3] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T029 [P] [US3] Contract test for [endpoint] in tests/contract/test_[name].py
+- [ ] T030 [P] [US3] Integration test for [user journey] in tests/integration/test_[name].py
 
 ### Implementation for User Story 3
 
-- [ ] T026 [P] [US3] Create [Entity] model in src/models/[entity].py
-- [ ] T027 [US3] Implement [Service] in src/services/[service].py
-- [ ] T028 [US3] Implement [endpoint/feature] in src/[location]/[file].py
+- [ ] T031 [P] [US3] Create [Entity] model in src/models/[entity].py
+- [ ] T032 [US3] Implement [Service] in src/services/[service].py
+- [ ] T033 [US3] Implement [endpoint/feature] in src/[location]/[file].py
 
 **Checkpoint**: All user stories should now be independently functional
 

@@ -95,6 +95,13 @@
 - **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
 - **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
 
+## Repository Placement & Naming *(mandatory)*
+
+- **Target Location**: [Exact directory path where this feature will live]
+- **Category**: [example | template | solved-task | shared-infra]
+- **Naming Compliance**: [Explain how folder/file names satisfy the repository naming contract]
+- **MCP Impact**: [None or describe how changes in `mcp/` remain backward compatible]
+
 ### Key Entities *(include if feature involves data)*
 
 - **[Entity 1]**: [What it represents, key attributes without implementation]

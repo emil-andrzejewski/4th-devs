@@ -1,50 +1,103 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+- Version change: 0.0.0 -> 1.0.0
+- Modified principles:
+  - N/A (initial ratification)
+- Added sections:
+  - Repository Scope And Structure
+  - Development Workflow And Quality Gates
+- Removed sections:
+  - None
+- Templates requiring updates:
+  - .specify/templates/plan-template.md: updated
+  - .specify/templates/spec-template.md: updated
+  - .specify/templates/tasks-template.md: updated
+  - .specify/templates/commands/*.md: pending (directory not present in this repository)
+- Runtime guidance updates:
+  - README.md: updated
+- Follow-up TODOs:
+  - None
+-->
+# AI_devs 4 Learning Repository Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Curriculum-First Repository Layout
+The repository MUST preserve the course-driven layout. Directories `.01`, `.02`, ...
+represent week-level materials, while `x_y_*` naming represents `week_day_*` learning
+units. This preserves navigability for study and review.
+Rationale: a stable learning map is required to keep examples, notes, and exercises
+discoverable across all five course weeks.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Naming Is A Contract
+Directory names for examples MUST follow `x_y_example_name`. Daily task starter content
+MUST live in `x_y_zadanie_template` (or its day-specific derivative if introduced later)
+and MUST remain clearly distinguishable from solved tasks. Renames that break this
+pattern are not allowed without a constitution amendment.
+Rationale: consistent names are required for human orientation and for scriptable
+automation across lessons.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Example/Task Separation Is Mandatory
+Examples are reference implementations and MUST stay isolated from user solutions.
+Task templates MUST stay minimal, reusable, and free of copied solved outputs.
+When adding new materials, contributors MUST explicitly choose one category:
+example, template, or solved task.
+Rationale: mixing categories weakens learning outcomes and makes progression tracking
+harder.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. MCP Compatibility By Default
+Shared MCP server implementations in `mcp/` MUST be reusable by both examples and task
+solutions. Any change in `mcp/` that can affect existing lessons MUST include migration
+notes and backward compatibility guidance in docs or commit description.
+Rationale: MCP infrastructure is a cross-cutting dependency for the repository and
+regressions here block many learning paths.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Runnable And Verifiable Learning Artifacts
+Each new example or task workflow MUST provide explicit run instructions (script name
+or command), required environment variables, and expected outputs or acceptance checks.
+If external services are required, the dependency MUST be stated where the feature is
+introduced.
+Rationale: learning assets are only useful when reproducible on a fresh local setup.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Repository Scope And Structure
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+- Scope: practical learning of agent-building patterns from the AI_devs 4 course.
+- Time model: five-week curriculum with per-day lesson granularity.
+- Canonical directories:
+  - `.01`, `.02`, ... for week-oriented materials and supporting assets.
+  - `x_y_example_name` for day-specific examples.
+  - `x_y_zadanie_template` for task starter templates.
+  - `mcp/` for MCP servers shared across examples and tasks.
+- Cross-directory utilities (root scripts/config) MUST avoid hardcoding one lesson path
+  when reusable alternatives exist.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Development Workflow And Quality Gates
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+- Before merging structural changes, verify naming and placement against Principles I-II.
+- Before merging MCP changes, verify at least one consumer workflow still runs and
+document compatibility impact.
+- New learning unit folders MUST include:
+  - concise purpose description,
+  - runnable command(s),
+  - environment requirements.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution overrides conflicting local conventions in lesson subdirectories.
+Amendments require: (1) a documented rationale, (2) explicit version bump decision
+using semantic versioning for governance text, and (3) synchronization of impacted
+templates under `.specify/templates/`.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+Compliance review is required in planning and task-generation phases:
+- `/speckit-plan` outputs MUST pass Constitution Check gates derived from this file.
+- `/speckit-tasks` outputs MUST include tasks that enforce repository structure,
+  MCP compatibility, and runnable verification requirements.
+- Reviews MUST reject changes that violate naming contracts or collapse
+  example/template/solution boundaries.
+
+Versioning policy for this constitution:
+- MAJOR: incompatible governance or principle removals/redefinitions.
+- MINOR: new principle/section or materially expanded obligations.
+- PATCH: clarifications, wording improvements, typo fixes.
+
+**Version**: 1.0.0 | **Ratified**: 2026-04-26 | **Last Amended**: 2026-04-26
