@@ -1,39 +1,33 @@
 /**
- * Image Recognition Agent
+ * Railway task agent runner.
  */
 
-import { createMcpClient, listMcpTools } from "./src/mcp/client.js";
 import { run } from "./src/agent.js";
-import { nativeTools } from "./src/native/tools.js";
 import log from "./src/helpers/logger.js";
-import { logStats } from "./src/helpers/stats.js";
+import { logStats, resetStats } from "./src/helpers/stats.js";
 
-const CLASSIFICATION_QUERY = `Classify all images in the images/ folder based on the character knowledge files.
-Read the knowledge files first, then analyze each image and copy it to the appropriate character folder(s).`;
+const TASK_QUERY = `Solve AG3NTS task "railway" end-to-end.
+
+Requirements:
+- Start with action help.
+- Follow API documentation exactly.
+- Handle temporary overload/rate-limit responses.
+- Continue until you obtain a flag in format {FLG:...}.
+- Keep tool calls minimal.`;
 
 const main = async () => {
-  log.box("Image Recognition Agent\nClassify images by character");
-
-  let mcpClient;
+  log.box("AG3NTS Railway Agent\nNative-loop execution");
+  resetStats();
 
   try {
-    log.start("Connecting to MCP server...");
-    mcpClient = await createMcpClient();
-    const mcpTools = await listMcpTools(mcpClient);
-    log.success(`MCP: ${mcpTools.map((tool) => tool.name).join(", ")}`);
-    log.success(`Native: ${nativeTools.map((tool) => tool.name).join(", ")}`);
-
-    log.start("Starting image classification...");
-    const result = await run(CLASSIFICATION_QUERY, { mcpClient, mcpTools });
-    log.success("Classification complete");
+    const result = await run(TASK_QUERY);
+    log.success("Run complete");
     log.info(result.response);
     logStats();
   } catch (error) {
-    throw error;
-  } finally {
-    if (mcpClient) {
-      await mcpClient.close().catch(() => {});
-    }
+    log.error("Pipeline error", error.message);
+    logStats();
+    process.exit(1);
   }
 };
 

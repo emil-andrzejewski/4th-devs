@@ -1,5 +1,5 @@
 {
-  "name": "01_04_image_recognition",
+  "name": "01_05_zadanie_railway",
   "type": "module",
   "scripts": {
     "start": "node app.js",

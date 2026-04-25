@@ -1,27 +1,32 @@
-# 01_04_image_recognition
+# 01_05_zadanie (railway)
 
-Vision-based image classification using MCP file operations and a native image-understanding tool.
+Autonomous native-tool agent for AG3NTS task `railway`.
+
+The agent:
+- starts with `{"action":"help"}`,
+- follows the API documentation returned by the task endpoint,
+- retries on `503` with exponential backoff,
+- respects rate-limit headers before next calls,
+- stops when it gets `{FLG:...}`.
 
 ## Run
 
 ```bash
-npm run lesson4:image_recognition
+cd C:\Users\Emil\repos\aidevs\4th-devs\01_05_zadanie
+npm start
 ```
 
-## Required setup
+## Required env (repo root `.env`)
 
-1. Copy `env.example` to `.env` in the repo root.
-2. Set one Responses API key: `OPENAI_API_KEY` or `OPENROUTER_API_KEY`.
-3. Put source images in `images/`.
-4. Keep character profiles in `knowledge/`.
+- `AG3NTS_API_KEY`
+- one of: `OPENAI_API_KEY` or `OPENROUTER_API_KEY`
 
-## What it does
+## Logging
 
-1. Reads the character descriptions from `knowledge/`
-2. Analyzes each file in `images/`
-3. Matches visible traits against the profiles
-4. Sorts files into `images/organized/<category>/`
+Console logs include full JSON traces (with secret redaction):
+- `LLM REQUEST`
+- `LLM RESPONSE`
+- `VERIFY REQUEST`
+- `VERIFY RESPONSE`
 
-## Notes
-
-Use `knowledge/*.md` to define the classification rules before running the example.
+Redacted fields include keys such as `apikey`, `authorization`, and `token`.

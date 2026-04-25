@@ -15,7 +15,7 @@ export const getStats = () => ({ ...totalTokens });
 
 export const logStats = () => {
   const { input, output, requests } = totalTokens;
-  console.log(`\n📊 Stats: ${requests} requests, ${input} input tokens, ${output} output tokens, ${input + output} total\n`);
+  console.log(`\nStats: ${requests} requests, ${input} input tokens, ${output} output tokens, ${input + output} total\n`);
 };
 
 export const resetStats = () => {
